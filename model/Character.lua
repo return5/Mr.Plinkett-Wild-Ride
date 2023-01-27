@@ -93,7 +93,7 @@ function Character:cmpBrainState(prevState)
 end
 
 function Character:new()
-    return setmetatable({ mentalState = 0,money = 0,medicineCount = 0,isLucid = true,pizzaRolls = 0,
+    return setmetatable({ mentalState = 0,money = 10,medicineCount = 0,isLucid = true,pizzaRolls = 0,
                          hasNightCourt = true,vcrFixed = true,mikeJay = false,deathMssg = "",police = false,hooker = false,
                          wife = false, clubGirl =false,policeChance = 0,score = 0,ss = false,mikeJayDead = false,
                          discoveredMissingNightCourt = false,nightCourtMssg = "",totalPizzaRolls = 0,totalBrainMedicine = 0,

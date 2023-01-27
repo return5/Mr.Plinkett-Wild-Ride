@@ -1,4 +1,3 @@
-local Output <const> = require('io.Output')
 local CallMikeJayMssg <const> = require('messages.CallMikeJay')
 
 local Dispatcher <const> = {}
@@ -46,8 +45,19 @@ function Dispatcher.eatPizzaRoll(plinkett,rand,options)
 
 end
 
-function Dispatcher.buyPizzaRoll(plinkett,rand,options)
-
+function Dispatcher.buyPizzaRoll(plinkett,rand)
+    if not plinkett.isLucid and rand(10) > 4 then
+        return true,"You went to the store to buy pizza rolls but somehow ended up in mexico with an unknown infection.\n",plinkett:adjustBrainValue(-2,rand)
+    end
+    if plinkett.money >= 5 then
+        plinkett:adjustMoney(-5)
+        plinkett:adjustScore(10)
+        return true,"You went to the store and bought some more pizza rolls.You cant wait to get home and eat some.\n",plinkett:adjustBrainValue(1,rand)
+    end
+    if not plinkett.isLucid then
+        return true,"You went to buy pizza rolls but were forced out of the store after yelling at can of beans for an hour.\n",plinkett:adjustBrainValue(-2,rand)
+    end
+    return true,"You went to the store to buy pizza rolls but they wouldn't give you any since you don't have any money.\n",plinkett:adjustBrainValue(-1,rand)
 end
 
 function Dispatcher.nightCourt(plinkett,rand)
