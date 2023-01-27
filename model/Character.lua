@@ -3,7 +3,6 @@ local setmetatable <const> = setmetatable
 local Helpers <const> = require('auxiliary.Helpers')
 local BadBrainStateMessages <const> = require('messages.BadBrainState')
 local GoodBrainStateMessages <const> = require('messages.GoodBrainState')
-local ceil <const> = math.ceil
 local abs <const> = math.abs
 
 local Character <const> = {}
@@ -19,10 +18,6 @@ function Character:changeMedicineCount(val)
     self.medicineCount = Helpers.remainAboveZero(self.medicineCount,val)
 end
 
-local function adjustBrainValue(x)
-    return ceil(x + (x * .3))
-end
-
 function Character:TakeBrainMedicine(rand)
     if self.medicineCount <= 0 then
         return "You are out of brain medicine."
@@ -33,7 +28,7 @@ function Character:TakeBrainMedicine(rand)
 end
 
 function Character:improveBrainState(val,rand)
-    self:changeBrainState(-1 * adjustBrainValue(self.mentalState))
+    self:changeBrainState(val)
     if self.mentalState > -10 then
         self.isLucid = true
     end
@@ -41,17 +36,16 @@ function Character:improveBrainState(val,rand)
 end
 
 function Character:worsenBrainState(val,rand)
-    self:changeBrainState(adjustBrainValue(self.mentalState * val))
+    self:changeBrainState(val)
+    if self.mentalState < -10 then
+        self.isLucid = false
+    end
     return BadBrainStateMessages[rand(#BadBrainStateMessages)]
 end
 
 function Character:adjustBrainValue(val,rand)
     if val < 0 then
-        local message <const> = self:worsenBrainState(val,rand)
-        if self.mentalState < -10 then
-            self.isLucid = false
-        end
-        return message
+        return self:worsenBrainState(val,rand)
     end
     return self:improveBrainState(val,rand)
 end
@@ -88,6 +82,10 @@ function Character:killHooker()
 end
 
 function Character:cmpBrainState(prevState)
+    if (prevState ~= 0 and self.mentalState == 0) or (prevState == 0 and self.mentalState ~= 0)  then
+        if abs(self.mentalState - prevState) >= 1 then return true end
+        return false
+    end
     local top <const> = abs(self.mentalState) > abs(prevState) and prevState or self.mentalState
     local bottom <const> = top == self.mentalState and self.mentalState or prevState
     --TODO adjust this value

@@ -54,7 +54,7 @@ local function checkVcr(plinkett,rand)
         plinkett.vcrFixed = true
         plinkett.adjustMoney(-10000)
         local mssg <const> = plinkett.adjustBrainValue(50,rand)
-        Output.writeAndWait("Against all odds Mike and Jay actually fixed your VCR. It only took 12 years and 10,000 dollars, but it was worth it.\n" .. mssg)
+        printBrainMessage("Against all odds Mike and Jay actually fixed your VCR. It only took 12 years and 10,000 dollars, but it was worth it.\n",mssg)
     end
     return true
 end

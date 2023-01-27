@@ -47,9 +47,9 @@ local function loopBody(plinkett,rand,options)
     local message <const> = RandConditions:checkRandConditions(plinkett,rand,options)
     Output.write(message)
     local func <const> = takeInput(options)
-    local cont,mssg <const> = func(plinkett,rand,options)
+    local cont,mssg,brainMessg <const> = func(plinkett,rand,options)
     if mssg then
-        Output.writeAndWait(mssg)
+        Output.writeAndWait(mssg,brainMessg)
     end
     return cont
 end
@@ -64,7 +64,7 @@ local function gameLoop(plinkett)
 end
 
 local function printEndMssg(plinkett)
-    Output.write(plinkett.deathMssg,"Final stats are:\n")
+    Output.write(plinkett.deathMssg,"You finished the game,congratulations! Final stats are:\n")
     Output.write("Score: ",plinkett.score,", money: ",plinkett.money,", total brain medicine taken: ",plinkett.totalBrainMedicine,
             ", Number of pizza rolls eaten: ",plinkett.totalPizzaRolls,", Number of pizza rolls sent to web zone: ",
             plinkett.totalPizzaRollsWeb,", Total number of youtube reviews made: ",plinkett.youtubesMade,"\n")

@@ -83,7 +83,7 @@ local function checkMikeJay(plinkett,rand,options)
         options.KillMikeJay = nil
     end
     if plinkett.mikeJayDead then
-        return 1
+        return 2
     end
     return 0
 end
