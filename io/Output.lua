@@ -17,6 +17,8 @@ end
 
 function Output.writeAndWait(...)
     Output.write(...)
+    Input.readString()
+    Input.readString()
 
 end
 

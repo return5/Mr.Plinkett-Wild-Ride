@@ -1,7 +1,6 @@
 --file to hold all the functions used to check conditions at the start of each round.
 
 local OptionsTable <const> = require('options.OptionsTable')
-local abs <const> = math.abs
 
 local ConditionCheck <const> = {}
 ConditionCheck.__index = ConditionCheck
@@ -105,7 +104,7 @@ local checkConditionTbl <const> = {
 local function getBrainMessage(plinkett,rand,brainState)
     local prevState <const> = plinkett.mentalState
     local message <const> = plinkett:adjustBrainValue(brainState,rand)
-    if abs(prevState - plinkett.mentalState) > 1 then
+    if plinkett:cmpBrainState(prevState) then
         return message .. "\n"
     end
     return ""

@@ -3,7 +3,8 @@ local setmetatable <const> = setmetatable
 local Helpers <const> = require('auxiliary.Helpers')
 local BadBrainStateMessages <const> = require('messages.BadBrainState')
 local GoodBrainStateMessages <const> = require('messages.GoodBrainState')
-local math <const> = math
+local ceil <const> = math.ceil
+local abs <const> = math.abs
 
 local Character <const> = {}
 Character.__index = Character
@@ -19,7 +20,7 @@ function Character:changeMedicineCount(val)
 end
 
 local function adjustBrainValue(x)
-    return math.ceil(x + (x * .3))
+    return ceil(x + (x * .3))
 end
 
 function Character:TakeBrainMedicine(rand)
@@ -33,6 +34,9 @@ end
 
 function Character:improveBrainState(val,rand)
     self:changeBrainState(-1 * adjustBrainValue(self.mentalState))
+    if self.mentalState > -10 then
+        self.isLucid = true
+    end
     return GoodBrainStateMessages[rand(#GoodBrainStateMessages)]
 end
 
@@ -83,8 +87,15 @@ function Character:killHooker()
     self.hookersKilled = self.hookersKilled + 1
 end
 
+function Character:cmpBrainState(prevState)
+    local top <const> = abs(self.mentalState) > abs(prevState) and prevState or self.mentalState
+    local bottom <const> = top == self.mentalState and self.mentalState or prevState
+    --TODO adjust this value
+    return abs((top/bottom) * 100) > 2
+end
+
 function Character:new()
-    return setmetatable({mentalState = 0,money = 0,medicineCount = 0,isLucid = true,pizzaRolls = 0,
+    return setmetatable({ mentalState = 0,money = 0,medicineCount = 0,isLucid = true,pizzaRolls = 0,
                          hasNightCourt = true,vcrFixed = true,mikeJay = false,deathMssg = "",police = false,hooker = false,
                          wife = false, clubGirl =false,policeChance = 0,score = 0,ss = false,mikeJayDead = false,
                          discoveredMissingNightCourt = false,nightCourtMssg = "",totalPizzaRolls = 0,totalBrainMedicine = 0,

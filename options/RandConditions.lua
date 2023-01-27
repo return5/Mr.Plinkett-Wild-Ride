@@ -12,6 +12,14 @@ local function getPoliceMessage(plinkett,rand)
     return "The police are at your door." .. plinkett.policeMessage[rand(#plinkett.policeMessage)]
 end
 
+local function printBrainMessage(plinkett,prevState,mssg,mssg2)
+    if plinkett:cmpBrainState(prevState) then
+        Output.writeAndWait(mssg .. mssg2)
+    else
+        Output.writeAndWait(mssg)
+    end
+end
+
 local function checkPolice(plinkett,rand,options)
     --TODO figure out proper value
     if plinkett.policeChance > rand(10) then
@@ -45,16 +53,49 @@ local function checkVcr(plinkett,rand)
     if plinkett.mikeJay and not plinkett.vcrFixed and rand(100) > 95 then
         plinkett.vcrFixed = true
         plinkett.adjustMoney(-10000)
-        plinkett.adjustBRainValue(50,rand)
-        Output.writeAndWait("Against all odds, Mike and jay actually fixed your VCR. It only took 12 years and 10,000 dollars but it was worth it.")
+        local mssg <const> = plinkett.adjustBrainValue(50,rand)
+        Output.writeAndWait("Against all odds Mike and Jay actually fixed your VCR. It only took 12 years and 10,000 dollars, but it was worth it.\n" .. mssg)
     end
+    return true
 end
+
+local function checkWifeNag(plinkett,rand)
+    if plinkett.wife and rand(10) > 6 then
+        local prevState <const> = plinkett.mentalState
+        local mssg <const> = plinkett:adjustBrainValue(-.7,rand)
+        printBrainMessage(plinkett,prevState,"Your wife is nagging you. Your mental state is worsening.\n",mssg)
+    end
+    return true
+end
+
+local function checkHookerNag(plinkett,rand)
+    if plinkett.hooker and rand(10) > 6 then
+        local prevState <const> = plinkett.mentalState
+        local mssg <const> = plinkett:adjustBrainValue(-.7,rand)
+        printBrainMessage(plinkett,prevState,"The hooker is pleading with you to let her see her baby. You dont know how much longer you can take this.\n",mssg)
+    end
+    return true
+end
+
+local function checkClubGirl(plinkett,rand)
+    if plinkett.clubGirl and rand(10) > 6 then
+        local prevState <const> = plinkett.mentalState
+        local mssg <const> = plinkett:adjustBrainValue(-.7,rand)
+        printBrainMessage(plinkett,prevState,"The kidnapped club girl is crying and pleading that if you let her go she wont tell nobody, it's driving you nuts.\n",mssg)
+    end
+    return true
+end
+
+local randCondFuncs <const> = {
+    loseNightCourt,checkVcr,checkWifeNag,checkHookerNag,checkClubGirl
+}
 
 function RandConditions:checkRandConditions(plinkett,rand,options)
     local cont, message = checkPolice(plinkett,rand,options)
     if cont then
-        loseNightCourt(plinkett,rand)
-        checkVcr(plinkett,rand)
+        for i=1,#randCondFuncs,1 do
+            randCondFuncs[i](plinkett,rand)
+        end
     end
     return message
 end

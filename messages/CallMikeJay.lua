@@ -4,14 +4,14 @@ local suicideMssg <const> = "After mistakenly calling a suicide help hotline and
 
 local function makeLucidTbl()
     return {
-        Option:new("You tried to call Mike and Jay but got the wrong number.",function(plinkett) plinkett.mikeJay = false ; return true end),
+        Option:new("You tried to call Mike and Jay but got the wrong number.",function(plinkett) plinkett.mikeJay = false; return true end),
         Option:new("You call Mike and Jay. They are on their way to fix your VCR.",function(plinkett) plinkett.mikeJay = true; plinkett:adjustScore(25); return true end),
         Option:new("You call Mike and Jay. They are on their way to fix your VCR.",function(plinkett) plinkett.mikeJay = true; plinkett:adjustScore(25); return true end),
         Option:new("You call Mike and Jay but it is their day off.",function(plinkett) plinkett.mikeJay = false; return true end),
         Option:new("You tried to call Mike and Jay but accidentally called a nigerian scammer and sent him some money. ",
-                function(plinkett,rand) plinkett.mikeJay = false; plinkett:adjustMoney(-50); plinkett:adjustScore(-10); plinkett:worsenBrainState(-1,rand); return true end),
+                function(plinkett,rand) plinkett.mikeJay = false; plinkett:adjustMoney(-50); plinkett:adjustScore(-10); return true,plinkett:worsenBrainState(-1,rand) end),
         Option:new("You try to call Mike and Jay but accidentally called a trans help hotline. You are now more confused than ever.",
-                function(plinkett,rand) plinkett.mikeJay = false; plinkett:worsenBrainState(1,rand);plinkett:adjustScore(-5); return true end)
+                function(plinkett,rand) plinkett.mikeJay = false;plinkett:adjustScore(-5); return true,plinkett:worsenBrainState(1,rand) end)
     }
 end
 

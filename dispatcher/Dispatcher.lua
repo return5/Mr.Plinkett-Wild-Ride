@@ -111,18 +111,13 @@ end
 
 function Dispatcher.callMikeJay(plinkett,rand)
     if plinkett.mikeJayDead then
-        Output.write("You went to call Mike and Jay to fix your VCR but remembered that you killed them.This brings a smile to your face\n")
-        plinkett:adjustBrainValue(1,rand)
-        return true
+        return true,"You went to call Mike and Jay to fix your VCR but remembered that you killed them.This brings a smile to your face\n", plinkett:adjustBrainValue(1,rand)
     end
     if plinkett.mikeJay then
-        Output.write("You try to call Mike and Jay but you later realize they are already at your house.This darkens your mood.\n")
-        plinkett:adjustBrainValue(-1,rand)
-        return true
+        return true,"You try to call Mike and Jay but you later realize they are already at your house.This darkens your mood.\n",plinkett:adjustBrainValue(-1,rand)
     end
     local option <const> = CallMikeJayMssg[plinkett.isLucid][rand(#CallMikeJayMssg[plinkett.isLucid])]
-    Output.write(option.message)
-    return option.func(plinkett,rand)
+    return option.func(plinkett,rand),option.message
 end
 
 return Dispatcher

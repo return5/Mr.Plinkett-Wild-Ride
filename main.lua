@@ -47,7 +47,11 @@ local function loopBody(plinkett,rand,options)
     local message <const> = RandConditions:checkRandConditions(plinkett,rand,options)
     Output.write(message)
     local func <const> = takeInput(options)
-    return func(plinkett,rand,options)
+    local cont,mssg <const> = func(plinkett,rand,options)
+    if mssg then
+        Output.writeAndWait(mssg)
+    end
+    return cont
 end
 
 local function gameLoop(plinkett)
@@ -56,9 +60,6 @@ local function gameLoop(plinkett)
     local cond = true
     while cond do
         cond = loopBody(plinkett,rand,options)
-        io.flush()
-        Input.readString()
-        Input.readString()
     end
 end
 
@@ -69,7 +70,7 @@ local function printEndMssg(plinkett)
             plinkett.totalPizzaRollsWeb,", Total number of youtube reviews made: ",plinkett.youtubesMade,"\n")
     Output.write("Number of wives killed: ",plinkett.wivesKilled,", Number of hookers killed: ",plinkett.hookersKilled,
             ", Number of club girls killed: ",plinkett.clubWomenKilled,"\n")
-    Output.write("Mike and Jay are ", plinkett.mikeJayDead and "thankfully dead and buried." or "unfortunately still alive.","\n")
+    Output.writeAndWait("Mike and Jay are ", plinkett.mikeJayDead and "thankfully dead and buried." or "unfortunately still alive.","\n")
 end
 
 local function main()
