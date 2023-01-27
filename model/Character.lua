@@ -67,7 +67,7 @@ function Character:new()
     return setmetatable({mentalState = 0,money = 0,medicineCount = 0,isLucid = true,pizzaRolls = 0,
                          hasNightCourt = true,vcrFixed = false,mikeJay = false,deathMssg = "",police = false,hooker = false,
                          wife = false, clubGirl =false,policeChance = 0,score = 0,ss = false,mikeJayDead = false,
-                         discoveredMissingNightCourt = false},self)
+                         discoveredMissingNightCourt = false,policeMessage = {"Your neighbors called the cops to do a wellness check on you."}},self)
 end
 
 return Character
