@@ -11,7 +11,7 @@ Character.__index = Character
 _ENV = Character
 
 function Character:changeBrainState(val)
-    self.mentalState = Helpers.remainAboveZero(self.mentalState,val)
+    self.mentalState = self.mentalState + val
 end
 
 function Character:changeMedicineCount(val)
@@ -27,6 +27,7 @@ function Character:TakeBrainMedicine(rand)
         return "You are out of brain medicine."
     end
     self:changeMedicineCount(-1)
+    self.totalBrainMedicine = self.totalBrainMedicine + 1
     self:improveBrainState(10,rand)
 end
 
@@ -52,7 +53,7 @@ function Character:adjustBrainValue(val,rand)
 end
 
 function Character:adjustMoney(val)
-    self.money = Helpers.remainAboveZero(self.money,val)
+    self.money = self.money + val
 end
 
 function Character:changeScore(val)
@@ -63,11 +64,32 @@ function Character:ChangePoliceChance(val)
     self.policeChance = Helpers.remainAboveZero(self.policeChance,val)
 end
 
+function Character:adjustScore(val)
+    self.score = self.score + val
+end
+
+function Character:killWife()
+    self.wife = false
+    self.wivesKilled = self.wivesKilled + 1
+end
+
+function Character:killWoman()
+    self.clubGirl = false
+    self.clubWomenKilled = self.clubWomenKilled + 1
+end
+
+function Character:killHooker()
+    self.hooker = false
+    self.hookersKilled = self.hookersKilled + 1
+end
+
 function Character:new()
     return setmetatable({mentalState = 0,money = 0,medicineCount = 0,isLucid = true,pizzaRolls = 0,
-                         hasNightCourt = true,vcrFixed = false,mikeJay = false,deathMssg = "",police = false,hooker = false,
+                         hasNightCourt = true,vcrFixed = true,mikeJay = false,deathMssg = "",police = false,hooker = false,
                          wife = false, clubGirl =false,policeChance = 0,score = 0,ss = false,mikeJayDead = false,
-                         discoveredMissingNightCourt = false,policeMessage = {"Your neighbors called the cops to do a wellness check on you."}},self)
+                         discoveredMissingNightCourt = false,nightCourtMssg = "",totalPizzaRolls = 0,totalBrainMedicine = 0,
+                         policeMessage = {"Your neighbors called the cops to do a wellness check on you."},
+                         wivesKilled = 0, hookersKilled = 0, clubWomenKilled = 0,totalPizzaRollsWeb = 0,youtubesMade = 0},self)
 end
 
 return Character

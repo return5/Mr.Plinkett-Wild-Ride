@@ -1,6 +1,7 @@
 --file to hold all the functions used to check conditions at the start of each round.
 
 local OptionsTable <const> = require('options.OptionsTable')
+local abs <const> = math.abs
 
 local ConditionCheck <const> = {}
 ConditionCheck.__index = ConditionCheck
@@ -82,19 +83,50 @@ local function checkMikeJay(plinkett,rand,options)
     if options.KillMikeJay then
         options.KillMikeJay = nil
     end
-    return 1
+    if plinkett.mikeJayDead then
+        return 1
+    end
+    return 0
+end
+
+local function checkNightCourt(plinkett,rand,options)
+    if plinkett.discoveredMissingNightCourt then
+        options.FindNightCourt = OptionsTable.FindNightCourt
+        return 0
+    end
+    options.FindNightCourt = nil
+    if plinkett.mikeJay and plinkett.hasNightCourt and rand(10) > 8 then
+        plinkett.hasNightCourt = false
+        plinkett.nightCourtMssg = "Mike and or Jay lost your Night Court tape.\n"
+        return 0
+    end
+    if plinkett.hasNightCourt and rand(10) > 8 then
+        plinkett.hasNightCourt = false
+        plinkett.nightCourtMssg = "Looks like you lost your precious Night Court tape.\n"
+        return 0
+    end
+    return 0
 end
 
 local checkConditionTbl <const> = {
-    checkHooker, checkMikeJay, checkWife,checkClubGirl
+    checkHooker, checkMikeJay,checkWife,checkClubGirl,checkNightCourt
 }
+
+local function getBrainMessage(plinkett,rand,brainState)
+    local prevState <const> = plinkett.mentalState
+    local message <const> = plinkett:adjustBrainValue(brainState,rand)
+    if abs(prevState - plinkett.mentalState) > 1 then
+        return message .. "\n"
+    end
+    return ""
+end
 
 function ConditionCheck:checkConditions(plinkett,rand,options)
     local brainState = 0
     for i=1,#checkConditionTbl,1 do
         brainState = brainState + checkConditionTbl[i](plinkett,rand,options)
     end
-    return plinkett:adjustBrainValue(brainState,rand)
+    return getBrainMessage(plinkett,rand,brainState)
 end
 
 return ConditionCheck

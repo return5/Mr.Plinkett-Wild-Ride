@@ -13,16 +13,15 @@ local function printOptions(options)
     return keys
 end
 
-local function takeInput(message,options)
-    Output.write(message)
+local function takeInput(options)
     local keys <const> = printOptions(options)
     local input <const> = Input.readNumber("n")
     if type(input) == "number" and input > 0 and #keys >= input and options[keys[input]] then
         return options[keys[input]].func
     end
-    Output.write("Wat? that wasn't correct, please try again.\n")
     Input.readLine()
-    return takeInput(message,options)
+    Output.clearAndPrint("Wat? that wasn't correct, please try again.\n")
+    return takeInput(options)
 end
 
 local function makeOptions()
@@ -36,7 +35,8 @@ local function makeOptions()
     }
 end
 local function printStats(plinkett)
-    Output.write("score: ",plinkett.score,", money: ",plinkett.money,", brain medicine: ",plinkett.medicineCount,", pizza rolls: ",plinkett.pizzaRolls,"\n")
+    Output.clearAndPrint("score: ",plinkett.score,", money: ",plinkett.money,", brain medicine: ",plinkett.medicineCount,
+            ", pizza rolls: ",plinkett.pizzaRolls,", Mental state: ",plinkett.mentalState,"\n")
 end
 
 local function getPoliceMessage(plinkett,rand)
@@ -60,25 +60,40 @@ end
 local function loopBody(plinkett,rand,options)
     printStats(plinkett)
     local brainMessage <const> = ConditionsCheck:checkConditions(plinkett,rand,options)
-    Output.write(brainMessage,"\n")
+    Output.write(brainMessage)
     local message <const> = checkRandConditions(plinkett,rand,options)
-    local func <const> = takeInput(message,options)
+    Output.write(message)
+    local func <const> = takeInput(options)
     return func(plinkett,rand,options)
 end
 
-local function gameLoop()
-    local plinkett <const> = Character:new()
+local function gameLoop(plinkett)
     local rand <const> = math.random
     local options <const> = makeOptions()
     local cond = true
     while cond do
-       cond = loopBody(plinkett,rand,options)
+        cond = loopBody(plinkett,rand,options)
+        io.flush()
+        Input.readString()
+        Input.readString()
     end
+end
+
+local function printEndMssg(plinkett)
+    Output.write(plinkett.deathMssg,"Final stats are:\n")
+    Output.write("Score: ",plinkett.score,", money: ",plinkett.money,", total brain medicine taken: ",plinkett.totalBrainMedicine,
+            ", Number of pizza rolls eaten: ",plinkett.totalPizzaRolls,", Number of pizza rolls sent to web zone: ",
+            plinkett.totalPizzaRollsWeb,", Total number of youtube reviews made: ",plinkett.youtubesMade,"\n")
+    Output.write("Number of wives killed: ",plinkett.wivesKilled,", Number of hookers killed: ",plinkett.hookersKilled,
+            ", Number of club girls killed: ",plinkett.clubWomenKilled,"\n")
+    Output.write("Mike and Jay are ", plinkett.mikeJayDead and "thankfully dead and buried." or "unfortunately still alive.","\n")
 end
 
 local function main()
     math.randomseed(os.time())
-    gameLoop()
+    local plinkett <const> = Character:new()
+    gameLoop(plinkett)
+    printEndMssg(plinkett)
 end
 
 main()

@@ -10,4 +10,13 @@ function Output.write(...)
     io.write(unpack({...}))
 end
 
+function Output.clearScrn()
+    io.write("\027[H\027[2J\027[3J")
+end
+
+function Output.clearAndPrint(...)
+    Output.clearScrn()
+    Output.write(...)
+end
+
 return Output

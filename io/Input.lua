@@ -9,6 +9,10 @@ function Input.readNumber()
     return io.read("n")
 end
 
+function Input.readString()
+    return io.read("l")
+end
+
 function Input.readLine()
     return io.read("L")
 end
