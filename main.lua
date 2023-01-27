@@ -3,6 +3,7 @@ local OptionsTable <const> = require('options.OptionsTable')
 local Output <const> = require('io.Output')
 local Input <const> = require('io.Input')
 local ConditionsCheck <const> = require('options.ConditionsCheck')
+local RandConditions <const> = require('options.RandConditions')
 
 local function printOptions(options)
     local keys <const> = {}
@@ -39,29 +40,11 @@ local function printStats(plinkett)
             ", pizza rolls: ",plinkett.pizzaRolls,", Mental state: ",plinkett.mentalState,"\n")
 end
 
-local function getPoliceMessage(plinkett,rand)
-    return "The police are at your door." .. plinkett.policeMessage[rand(#plinkett.policeMessage)]
-end
-
-local function checkRandConditions(plinkett,rand,options)
-    --TODO figure out proper value
-    if plinkett.policeChance > rand(10) then
-        options = {
-            EatPizzaRoll = OptionsTable.EatPizzaRoll,
-            NightCourt = OptionsTable.NightCourt,
-            FightPolice = OptionsTable.FightPolice,
-            Surrender = OptionsTable.Surrender
-        }
-        return getPoliceMessage(plinkett,rand)
-    end
-    return "What would you like to do today Mr.Plinkett?\n"
-end
-
 local function loopBody(plinkett,rand,options)
     printStats(plinkett)
     local brainMessage <const> = ConditionsCheck:checkConditions(plinkett,rand,options)
     Output.write(brainMessage)
-    local message <const> = checkRandConditions(plinkett,rand,options)
+    local message <const> = RandConditions:checkRandConditions(plinkett,rand,options)
     Output.write(message)
     local func <const> = takeInput(options)
     return func(plinkett,rand,options)

@@ -1,5 +1,6 @@
 local io <const> = io
 local unpack <const> = table.unpack
+local Input <const> = require('io.Input')
 
 local Output <const> = {}
 Output.__index = Output
@@ -12,6 +13,11 @@ end
 
 function Output.clearScrn()
     io.write("\027[H\027[2J\027[3J")
+end
+
+function Output.writeAndWait(...)
+    Output.write(...)
+
 end
 
 function Output.clearAndPrint(...)

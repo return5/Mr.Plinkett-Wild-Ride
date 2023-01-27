@@ -89,22 +89,12 @@ local function checkMikeJay(plinkett,rand,options)
     return 0
 end
 
-local function checkNightCourt(plinkett,rand,options)
+local function checkNightCourt(plinkett,_,options)
     if plinkett.discoveredMissingNightCourt then
         options.FindNightCourt = OptionsTable.FindNightCourt
         return 0
     end
     options.FindNightCourt = nil
-    if plinkett.mikeJay and plinkett.hasNightCourt and rand(10) > 8 then
-        plinkett.hasNightCourt = false
-        plinkett.nightCourtMssg = "Mike and or Jay lost your Night Court tape.\n"
-        return 0
-    end
-    if plinkett.hasNightCourt and rand(10) > 8 then
-        plinkett.hasNightCourt = false
-        plinkett.nightCourtMssg = "Looks like you lost your precious Night Court tape.\n"
-        return 0
-    end
     return 0
 end
 
