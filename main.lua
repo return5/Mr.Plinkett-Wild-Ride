@@ -32,7 +32,8 @@ local function makeOptions()
         EatPizzaRoll = OptionsTable.EatPizzaRoll,
         NightCourt = OptionsTable.NightCourt,
         SocialSecurity = OptionsTable.SocialSecurity,
-        BuyPizzaRoll = OptionsTable.BuyPizzaRoll
+        BuyPizzaRoll = OptionsTable.BuyPizzaRoll,
+        Quit = OptionsTable.Quit
     }
 end
 local function printStats(plinkett)

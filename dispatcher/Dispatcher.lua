@@ -41,8 +41,30 @@ function Dispatcher.socialSecurity(plinkett,rand,options)
 
 end
 
-function Dispatcher.eatPizzaRoll(plinkett,rand,options)
-
+function Dispatcher.eatPizzaRoll(plinkett,rand)
+    if plinkett.pizzaRolls <= 0 then
+        plinkett:adjustScore(-5)
+        return true,"You want to eat pizza rolls but you don't have any.This is a tragic moment.\n",plinkett:adjustBrainValue(-1,rand)
+    end
+    if rand(10) > 7 then
+        plinkett:adjustScore(-10)
+        plinkett:adjustPizzaRolls(-5)
+        return true,"You cooked some pizza rolls but accidentally spilled them on yourself and burned yourself pretty bad.\n",plinkett:adjustBrainValue(-2,rand)
+    end
+    if rand(10) > 7 then
+        plinkett:adjustScore(15)
+        plinkett:eatPizzaRolls(-5)
+        return true,"You opened the bag of pizza rolls and found it contains many extra pizza rolls. this brightens your mood.\n",plinkett:adjustBrainValue(2,rand)
+    end
+    if rand(100) > 98  then
+        plinkett:adjustScore(-200)
+        plinkett:eatPizzaRolls(-5)
+        plinkett.deathMssg = "You choked to death on a pizza roll.It isn't a glorious way to go, but it isn't unexpected.\n"
+        return false,"You were happily eating pizza rolls until you started to choke on one. It's finally the end of Plinkett.\n"
+    end
+    plinkett:adjustScore(5)
+    plinkett:eatPizzaRolls(-5)
+    return true,"You cook and eat some pizza rolls.You feel full and mentally are feeling better.\n",plinkett:adjustBrainValue(1,rand)
 end
 
 function Dispatcher.buyPizzaRoll(plinkett,rand)
@@ -52,6 +74,7 @@ function Dispatcher.buyPizzaRoll(plinkett,rand)
     if plinkett.money >= 5 then
         plinkett:adjustMoney(-5)
         plinkett:adjustScore(10)
+        plinkett:adjustPizzaRolls(10)
         return true,"You went to the store and bought some more pizza rolls.You cant wait to get home and eat some.\n",plinkett:adjustBrainValue(1,rand)
     end
     if not plinkett.isLucid then
@@ -116,6 +139,11 @@ function Dispatcher.callMikeJay(plinkett,rand)
     end
     local option <const> = CallMikeJayMssg[plinkett.isLucid][rand(#CallMikeJayMssg[plinkett.isLucid])]
     return option.func(plinkett,rand),option.message
+end
+
+function Dispatcher.quit(plinkett)
+    plinkett.deathMssg = "You quit, you quitter."
+    return false,"You quit the game. Life as Plinkett isn't for the faint of heart."
 end
 
 return Dispatcher

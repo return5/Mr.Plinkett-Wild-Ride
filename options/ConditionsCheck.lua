@@ -88,6 +88,22 @@ local function checkMikeJay(plinkett,rand,options)
     return 0
 end
 
+local function checkYoutubes(plinkett,rand,options)
+    if plinkett.youtubesMade > 0 and rand(10) > 5 then
+        options.SendPizzaRoll = OptionsTable.SendPizzaRoll
+    end
+    return 0
+end
+
+local function makeYoutube(plinkett,rand,options)
+    if not options.YoutubeVideo and plinkett.mentalState < 0 and rand(10) > 6 then
+        options.YoutubeVideo = OptionsTable.YoutubeVideo
+    elseif options.YoutubeVideo and rand(10) > 6 then
+        options.YoutubeVideo = nil
+    end
+    return 0
+end
+
 local function checkNightCourt(plinkett,_,options)
     if plinkett.discoveredMissingNightCourt then
         options.FindNightCourt = OptionsTable.FindNightCourt
@@ -98,7 +114,7 @@ local function checkNightCourt(plinkett,_,options)
 end
 
 local checkConditionTbl <const> = {
-    checkHooker, checkMikeJay,checkWife,checkClubGirl,checkNightCourt
+    checkHooker, checkMikeJay,checkWife,checkClubGirl,checkNightCourt,checkYoutubes,makeYoutube
 }
 
 local function getBrainMessage(plinkett,rand,brainState)

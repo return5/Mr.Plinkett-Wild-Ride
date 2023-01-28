@@ -86,8 +86,21 @@ local function checkClubGirl(plinkett,rand)
     return true
 end
 
+local function checkYoutube(plinkett,rand)
+    if plinkett.youtubesMade > 0 then
+        if rand(10) > 7 then
+            printBrainMessage(plinkett,"Your youtube videos are getting comments on their webzone. They demand you send them some Pizza Roll\n",plinkett:adjustBrainValue(-1,rand))
+            return true
+        end
+        if rand(10) > 7 then
+            plinkett:adjustMoney(15)
+            printBrainMessage(plinkett,"Your youtube videos are popular, they have brought in some donations.",plinkett:adjustBrainValue(1,rand))
+        end
+    end
+end
+
 local randCondFuncs <const> = {
-    loseNightCourt,checkVcr,checkWifeNag,checkHookerNag,checkClubGirl
+    loseNightCourt,checkVcr,checkWifeNag,checkHookerNag,checkClubGirl,checkYoutube
 }
 
 function RandConditions:checkRandConditions(plinkett,rand,options)

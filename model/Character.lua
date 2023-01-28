@@ -92,6 +92,16 @@ function Character:cmpBrainState(prevState)
     return abs((top/bottom) * 100) > 2
 end
 
+function Character:adjustPizzaRolls(val)
+    self.pizzaRolls = Helpers.remainAboveZero(self.pizzaRolls,val)
+end
+
+function Character:eatPizzaRolls(val)
+    local prev <const> = self.pizzaRolls
+    self:adjustPizzaRolls(val)
+    self.totalPizzaRolls = self.totalPizzaRolls + abs(prev - self.pizzaRolls)
+end
+
 function Character:new()
     return setmetatable({ mentalState = 0,money = 10,medicineCount = 0,isLucid = true,pizzaRolls = 0,
                          hasNightCourt = true,vcrFixed = true,mikeJay = false,deathMssg = "",police = false,hooker = false,
