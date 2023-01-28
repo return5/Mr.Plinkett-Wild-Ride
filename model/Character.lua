@@ -118,7 +118,7 @@ function Character:adjustVideos(val)
     self.youtubesMade = self.youtubesMade + val
 end
 
-function Character:AdjustPoliceChance(val)
+function Character:changePoliceChance(val)
     self.policeChance = Helpers.remainAboveZero(self.policeChance,val)
 end
 

@@ -130,16 +130,16 @@ function Dispatcher.youtubeVideo(plinkett,rand)
         return true,"You started to make the video but got so upset with your grand-kids for messing with your plastic bin that you quit in a rage.\n",plinkett:adjustBrainValue(-2,rand)
     end
     if plinkett.mikeJay and rand(10) > 5 then
-        return true,"Mike and Jay said your youtube video was keeping them form fixing your VCR so you stopped making it.\n"
+        return true,"Mike and Jay said your youtube video was keeping them from fixing your VCR so you stopped making it.\n"
     end
     if plinkett.hooker and rand(13) > 9 then
         plinkett:adjustVideos(1)
-        plinkett:adjustPoliceChance(3)
+        plinkett:changePoliceChance(3)
         return true,"You made a youtube video reviewing a movie you hate.Unfortunately you accidentally included footage of the hooker you kidnapped.",plinkett:adjustBrainValue(-1,rand)
     end
     if plinkett.clubGirl and rand(13) > 9 then
         plinkett:adjustVideos(1)
-        plinkett:adjustPoliceChance(3)
+        plinkett:changePoliceChance(3)
         return true,"You successfully uploaded a youtubes video reviewing a bad movie.You didnt know how to remove the video showing the kidnapped girl in your basement.",plinkett:adjustBrainValue(-1,rand)
     end
     plinkett:adjustVideos(1)

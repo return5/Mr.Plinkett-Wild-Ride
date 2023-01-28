@@ -33,7 +33,7 @@ local function makeOptions()
         NightCourt = OptionsTable.NightCourt,
         SocialSecurity = OptionsTable.SocialSecurity,
         BuyPizzaRoll = OptionsTable.BuyPizzaRoll,
-        Quit = OptionsTable.Quit
+        Quit = OptionsTable.Quit,
     }
 end
 local function printStats(plinkett)
@@ -42,6 +42,7 @@ local function printStats(plinkett)
 end
 
 local function loopBody(plinkett,rand,options)
+    plinkett.mentalState = -15
     printStats(plinkett)
     local brainMessage <const> = ConditionsCheck:checkConditions(plinkett,rand,options)
     Output.write(brainMessage)
