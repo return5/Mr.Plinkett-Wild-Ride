@@ -122,8 +122,28 @@ function Dispatcher.kidnapHooker(plinkett,rand,options)
 
 end
 
-function Dispatcher.youtubeVideo(plinkett,rand,options)
-
+function Dispatcher.youtubeVideo(plinkett,rand)
+    if rand(10) > 8 then
+        return true,"You Couldn't figure out how to turn on your Camera so you gave up.\n",plinkett:adjustBrainValue(-1,rand)
+    end
+    if rand(10) > 8 then
+        return true,"You started to make the video but got so upset with your grand-kids for messing with your plastic bin that you quit in a rage.\n",plinkett:adjustBrainValue(-2,rand)
+    end
+    if plinkett.mikeJay and rand(10) > 5 then
+        return true,"Mike and Jay said your youtube video was keeping them form fixing your VCR so you stopped making it.\n"
+    end
+    if plinkett.hooker and rand(13) > 9 then
+        plinkett:adjustVideos(1)
+        plinkett:adjustPoliceChance(3)
+        return true,"You made a youtube video reviewing a movie you hate.Unfortunately you accidentally included footage of the hooker you kidnapped.",plinkett:adjustBrainValue(-1,rand)
+    end
+    if plinkett.clubGirl and rand(13) > 9 then
+        plinkett:adjustVideos(1)
+        plinkett:adjustPoliceChance(3)
+        return true,"You successfully uploaded a youtubes video reviewing a bad movie.You didnt know how to remove the video showing the kidnapped girl in your basement.",plinkett:adjustBrainValue(-1,rand)
+    end
+    plinkett:adjustVideos(1)
+    return true,"You created and then uploaded a video to youtube reviewing a movie. You feel a sense of relief from it.",plinkett:adjustBrainValue(1,rand)
 end
 
 function Dispatcher.brainMedicine(plinkett,rand,options)

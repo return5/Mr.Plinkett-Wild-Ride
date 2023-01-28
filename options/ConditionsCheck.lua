@@ -100,6 +100,8 @@ local function makeYoutube(plinkett,rand,options)
         options.YoutubeVideo = OptionsTable.YoutubeVideo
     elseif options.YoutubeVideo and rand(10) > 6 then
         options.YoutubeVideo = nil
+    elseif plinkett.mentalState > 0 then
+        options.YoutubeVideo = nil
     end
     return 0
 end

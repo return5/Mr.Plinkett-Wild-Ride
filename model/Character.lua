@@ -5,7 +5,12 @@ local BadBrainStateMessages <const> = require('messages.BadBrainState')
 local GoodBrainStateMessages <const> = require('messages.GoodBrainState')
 local abs <const> = math.abs
 
-local Character <const> = {}
+local Character <const> = {mentalState = 0,money = 10,medicineCount = 0,isLucid = true,pizzaRolls = 0,
+                           hasNightCourt = true,vcrFixed = false,mikeJay = false,deathMssg = "",police = false,hooker = false,
+                           wife = false, clubGirl =false,policeChance = 0,score = 0,ss = false,mikeJayDead = false,
+                           discoveredMissingNightCourt = false,nightCourtMssg = "",totalPizzaRolls = 0,totalBrainMedicine = 0,
+                           policeMessage = {"Your neighbors called the cops to do a wellness check on you."},
+                           wivesKilled = 0, hookersKilled = 0, clubWomenKilled = 0,totalPizzaRollsWeb = 0,youtubesMade = 0}
 Character.__index = Character
 
 _ENV = Character
@@ -102,13 +107,23 @@ function Character:eatPizzaRolls(val)
     self.totalPizzaRolls = self.totalPizzaRolls + abs(prev - self.pizzaRolls)
 end
 
+function Character:checkPoliceMessage(message)
+    for i=1,#self.policeMessage,1 do
+        if self.policeMessage[i] == message then return true end
+    end
+    return false
+end
+
+function Character:adjustVideos(val)
+    self.youtubesMade = self.youtubesMade + val
+end
+
+function Character:AdjustPoliceChance(val)
+    self.policeChance = Helpers.remainAboveZero(self.policeChance,val)
+end
+
 function Character:new()
-    return setmetatable({ mentalState = 0,money = 10,medicineCount = 0,isLucid = true,pizzaRolls = 0,
-                         hasNightCourt = true,vcrFixed = true,mikeJay = false,deathMssg = "",police = false,hooker = false,
-                         wife = false, clubGirl =false,policeChance = 0,score = 0,ss = false,mikeJayDead = false,
-                         discoveredMissingNightCourt = false,nightCourtMssg = "",totalPizzaRolls = 0,totalBrainMedicine = 0,
-                         policeMessage = {"Your neighbors called the cops to do a wellness check on you."},
-                         wivesKilled = 0, hookersKilled = 0, clubWomenKilled = 0,totalPizzaRollsWeb = 0,youtubesMade = 0},self)
+    return setmetatable({ },self)
 end
 
 return Character
