@@ -115,8 +115,19 @@ local function checkNightCourt(plinkett,_,options)
     return 0
 end
 
+local function checkMedicine(plinkett,_,options)
+    if plinkett.turnsSinceMedicine <= 3 then
+        options.BrainMedicine = nil
+        return 0
+    end
+    if plinkett.turnsSinceMedicine > 3 then
+        options.BrainMedicine = OptionsTable.BrainMedicine
+        return 0
+    end
+end
+
 local checkConditionTbl <const> = {
-    checkHooker, checkMikeJay,checkWife,checkClubGirl,checkNightCourt,checkYoutubes,makeYoutube
+    checkHooker, checkMikeJay,checkWife,checkClubGirl,checkNightCourt,checkYoutubes,makeYoutube,checkMedicine
 }
 
 local function getBrainMessage(plinkett,rand,brainState)

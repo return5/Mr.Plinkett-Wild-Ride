@@ -5,12 +5,13 @@ local BadBrainStateMessages <const> = require('messages.BadBrainState')
 local GoodBrainStateMessages <const> = require('messages.GoodBrainState')
 local abs <const> = math.abs
 
-local Character <const> = {mentalState = 0,money = 10,medicineCount = 0,isLucid = true,pizzaRolls = 0,
+local Character <const> = {mentalState = 0,money = 10,medicineCount = 1,isLucid = true,pizzaRolls = 0,
                            hasNightCourt = true,vcrFixed = false,mikeJay = false,deathMssg = "",police = false,hooker = false,
                            wife = false, clubGirl =false,policeChance = 0,score = 0,ss = false,mikeJayDead = false,
                            discoveredMissingNightCourt = false,nightCourtMssg = "",totalPizzaRolls = 0,totalBrainMedicine = 0,
                            policeMessage = {"Your neighbors called the cops to do a wellness check on you."},
-                           wivesKilled = 0, hookersKilled = 0, clubWomenKilled = 0,totalPizzaRollsWeb = 0,youtubesMade = 0}
+                           wivesKilled = 0, hookersKilled = 0, clubWomenKilled = 0,totalPizzaRollsWeb = 0,youtubesMade = 0,
+                            turnsSinceMedicine = 10}
 Character.__index = Character
 
 _ENV = Character
@@ -19,17 +20,22 @@ function Character:changeBrainState(val)
     self.mentalState = self.mentalState + val
 end
 
+function Character:increaseTurnsSinceMedicine()
+    self.turnsSinceMedicine = self.turnsSinceMedicine + 1
+end
+
 function Character:changeMedicineCount(val)
     self.medicineCount = Helpers.remainAboveZero(self.medicineCount,val)
 end
 
-function Character:TakeBrainMedicine(rand)
+function Character:takeBrainMedicine(rand)
     if self.medicineCount <= 0 then
         return "You are out of brain medicine."
     end
     self:changeMedicineCount(-1)
     self.totalBrainMedicine = self.totalBrainMedicine + 1
-    self:improveBrainState(10,rand)
+    self.turnsSinceMedicine = -1
+    return "You took some brain medicine.",self:improveBrainState(10,rand)
 end
 
 function Character:improveBrainState(val,rand)

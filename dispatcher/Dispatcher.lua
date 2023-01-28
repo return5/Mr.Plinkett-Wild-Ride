@@ -71,6 +71,16 @@ function Dispatcher.buyPizzaRoll(plinkett,rand)
     if not plinkett.isLucid and rand(10) > 4 then
         return true,"You went to the store to buy pizza rolls but somehow ended up in mexico with an unknown infection.\n",plinkett:adjustBrainValue(-2,rand)
     end
+    if not plinkett.isLucid and rand(100) > 98 then
+        plinkett:adjustScore(-100)
+        plinkett.deathMssg = "You got hit by a car trying to buy pizza rolls\n"
+        return false,"While going ot the store to buy pizza rolls you saw a dog and tried to pet it but turns out it was actually a speeding car.In your confusion you got hit.\n"
+    end
+    if plinkett.isLucid and rand(100) > 98 then
+        plinkett:adjustScore(-100)
+        plinkett.deathMssg = "You died by being thrown off a bridge.\n"
+        return false,"While walking to the store you get thrown off a bridge by two mysterious men. One of them might have been amish.\n"
+    end
     if plinkett.money >= 5 then
         plinkett:adjustMoney(-5)
         plinkett:adjustScore(10)
@@ -146,8 +156,8 @@ function Dispatcher.youtubeVideo(plinkett,rand)
     return true,"You created and then uploaded a video to youtube reviewing a movie. You feel a sense of relief from it.",plinkett:adjustBrainValue(1,rand)
 end
 
-function Dispatcher.brainMedicine(plinkett,rand,options)
-
+function Dispatcher.brainMedicine(plinkett,rand)
+    return true,plinkett:takeBrainMedicine(rand)
 end
 
 function Dispatcher.callMikeJay(plinkett,rand)
