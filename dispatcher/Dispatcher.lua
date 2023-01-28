@@ -45,7 +45,8 @@ function Dispatcher.socialSecurity(plinkett,rand)
     if not plinkett.isLucid and rand(10) > 8 then
         plinkett:adjustScore(15)
         plinkett:adjustMoney(35)
-        return true,"You were confused and told the social secuirty office you were someone else. Luckily they didn't question this and gave you their substantially larger check.\n",plinkett:adjustBrainValue(1,rand)
+    --    plinkett.turnsSinceSS = -1
+        return true,"In your confused state you told the social security office you were someone else. Luckily they didn't question this and gave you their substantially larger check.\n",plinkett:adjustBrainValue(1,rand)
     end
     if not plinkett.isLucid and rand(100) > 97 then
         plinkett:adjustScore(-200)
@@ -55,10 +56,12 @@ function Dispatcher.socialSecurity(plinkett,rand)
     if plinkett.isLucid and rand(10) > 7 then
         plinkett:adjustScore(25)
         plinkett:adjustMoney(25)
+     --   plinkett.turnsSinceSS = -1
         return true,"In your unusually lucid state you remember that you are suppose to get a bigger check than usual today.\n",plinkett:adjustBrainValue(1,rand)
     end
     plinkett:adjustScore(10)
     plinkett:adjustMoney(15)
+    --plinkett.turnsSinceSS = -1
     return true,"You manage to get to the social security office and get your check then make it safely back home.\n",plinkett:adjustBrainValue(.5,rand)
 end
 
