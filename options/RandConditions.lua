@@ -87,26 +87,25 @@ local function checkClubGirl(plinkett,rand)
 end
 
 local function checkYoutube(plinkett,rand)
-    for i=1,plinkett.youtubesMade,1 do
-        if rand(10) > 7 then
-            printBrainMessage(plinkett,"Your youtube videos are getting comments on their webzone. They demand you send them some Pizza Roll\n",plinkett:adjustBrainValue(-1,rand))
+    if rand(10) <= 3 then
+        plinkett:adjustChanceToGetMoney(-1)
+        printBrainMessage(plinkett,"Your youtube videos are getting comments on their webzone. They demand you send them some Pizza Roll\n",plinkett:adjustBrainValue(-1,rand))
+        return true
+    end
+    if rand(10) <= plinkett.chanceToGetMoney then
+        plinkett:adjustMoney(15)
+        printBrainMessage(plinkett,"Your youtube videos are popular, they have brought in some donations.\n",plinkett:adjustBrainValue(1,rand))
+        return true
+    end
+    if rand(10) <= plinkett.policeChance then
+        local message <const> = "A viewer of your youtube videos tipped the police off."
+        if not plinkett:checkPoliceMessage(message) then
+            plinkett.policeMessage[#plinkett.policeMessage + 1] = message
             return true
         end
-        if rand(10) > 7 then
-            plinkett:adjustMoney(15)
-            printBrainMessage(plinkett,"Your youtube videos are popular, they have brought in some donations.\n",plinkett:adjustBrainValue(1,rand))
-            return true
-        end
-        if rand(10) > 8 then
-            local message <const> = "A viewer of your youtube videos tipped the police off."
-            if not plinkett:checkPoliceMessage(message) then
-                plinkett.policeMessage[#plinkett.policeMessage + 1] = message
-                return true
-            end
-        end
-        if rand(10) > 7 then
-            plinkett:changePoliceChance(.2)
-        end
+    end
+    if rand(10) <= plinkett.chanceToGetMoney then
+        plinkett:changePoliceChance(.2)
     end
     return true
 end

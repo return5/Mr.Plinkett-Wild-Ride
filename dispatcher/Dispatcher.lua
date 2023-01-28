@@ -21,7 +21,7 @@ function Dispatcher.killMikeJay(plinkett,rand,options)
 
 end
 
-function Dispatcher.killWoman(plinkett,rand,options)
+function Dispatcher.killHooker(plinkett,rand,options)
 
 end
 
@@ -29,12 +29,39 @@ function Dispatcher.killWoman(plinkett,rand,options)
 
 end
 
-function Dispatcher.killWoman(plinkett,rand,options)
+function Dispatcher.killWife(plinkett,rand,options)
 
 end
 
 function Dispatcher.sendPizzaRoll(plinkett,rand,options)
-
+    if plinkett.pizzaRolls > 0 then
+        if rand(10) > 7 then
+            plinkett:adjustPizzaRolls(-3)
+            plinkett:adjustChanceToGetMoney(-1)
+            plinkett:adjustScore(-5)
+            return true,"You tried to send some pizza rolls but ate them instead.\n",plinkett:adjustBrainValue(.5,rand)
+        end
+        if rand(10) > 8 then
+            plinkett:adjustChanceToGetMoney(-1)
+            plinkett:adjustScore(-5)
+            return true,"You were putting pizza rolls into envelopes but ended up cutting your finger on an envelope. The pain drives you into a rage.\n",plinkett:adjustBrainValue(-1,rand)
+        end
+        if plinkett.pizzaRolls > 5 and rand(10) > 8 then
+            plinkett:adjustPizzaRolls(-5)
+            plinkett:adjustChanceToGetMoney(2)
+            plinkett:adjustScore(10)
+           return true,"You send out a bunch of pizza rolls to commenters. You also made sure they were hot and delicious before sending them.",plinkett:adjustBrainValue(-1,rand)
+        end
+        plinkett:adjustPizzaRolls(-3)
+        plinkett:adjustChanceToGetMoney(1)
+        plinkett:adjustScore(5)
+        return true,"You sent some pizza rolls to commenters on your webzone.\n",plinkett:adjustBrainValue(-.5,rand)
+    end
+    if rand(10) > 8 then
+        plinkett:adjustScore(-5)
+        return true,"You went to send pizza rolls but discovered you were out of them. You feel an overwhelming sense of dread.\n",plinkett:adjustBrainValue(-2,rand)
+    end
+    return true,"You tried to send pizza rolls to your webzone but you dont have any pizza rolls.\n",plinkett:adjustBrainValue(-1,rand)
 end
 
 function Dispatcher.socialSecurity(plinkett,rand)
@@ -169,14 +196,23 @@ function Dispatcher.youtubeVideo(plinkett,rand)
     if plinkett.hooker and rand(13) > 9 then
         plinkett:adjustVideos(1)
         plinkett:changePoliceChance(3)
-        return true,"You made a youtube video reviewing a movie you hate.Unfortunately you accidentally included footage of the hooker you kidnapped.",plinkett:adjustBrainValue(-1,rand)
+        plinkett:adjustChanceToGetMoney(2)
+        return true,"You made a youtube video reviewing a movie you hate.Unfortunately you accidentally included footage of the hooker you kidnapped.\n",plinkett:adjustBrainValue(-1,rand)
     end
     if plinkett.clubGirl and rand(13) > 9 then
         plinkett:adjustVideos(1)
         plinkett:changePoliceChance(3)
-        return true,"You successfully uploaded a youtubes video reviewing a bad movie.You didnt know how to remove the video showing the kidnapped girl in your basement.",plinkett:adjustBrainValue(-1,rand)
+        plinkett:adjustChanceToGetMoney(2)
+        return true,"You successfully uploaded a youtubes video reviewing a bad movie.You didnt know how to remove the video showing the kidnapped girl in your basement.\n",plinkett:adjustBrainValue(-1,rand)
+    end
+    if plinkett.wivesKilled > 0 then
+        plinkett:adjustVideos(1)
+        plinkett:changePoliceChance(2)
+        plinkett:adjustChanceToGetMoney(2)
+        return true,"You make a video review of a bad movie and upload it to youtube. In your state of confusion you mentioned your dead wife in the video. You cant recall if you admitted to killing her or not.\n",plinkett:adjustBrainValue(-1,rand)
     end
     plinkett:adjustVideos(1)
+    plinkett:adjustChanceToGetMoney(1)
     return true,"You created and then uploaded a video to youtube reviewing a movie. You feel a sense of relief from it.",plinkett:adjustBrainValue(1,rand)
 end
 

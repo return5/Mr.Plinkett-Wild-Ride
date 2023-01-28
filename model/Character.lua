@@ -11,7 +11,7 @@ local Character <const> = {mentalState = 0,money = 10,medicineCount = 1,isLucid 
                            discoveredMissingNightCourt = false,nightCourtMssg = "",totalPizzaRolls = 0,totalBrainMedicine = 0,
                            policeMessage = {"Your neighbors called the cops to do a wellness check on you."},
                            wivesKilled = 0, hookersKilled = 0, clubWomenKilled = 0,totalPizzaRollsWeb = 0,youtubesMade = 0,
-                            turnsSinceMedicine = 10,turnsSinceSS = 10}
+                            turnsSinceMedicine = 10,turnsSinceSS = 10,chanceToGetMoney = 0}
 Character.__index = Character
 
 _ENV = Character
@@ -33,6 +33,7 @@ function Character:takeBrainMedicine(rand)
         return "You are out of brain medicine."
     end
     self:changeMedicineCount(-1)
+    self:adjustScore(5)
     self.totalBrainMedicine = self.totalBrainMedicine + 1
     self.turnsSinceMedicine = -1
     return "You took some brain medicine.",self:improveBrainState(10,rand)
@@ -90,6 +91,13 @@ end
 function Character:killHooker()
     self.hooker = false
     self.hookersKilled = self.hookersKilled + 1
+end
+
+function Character:adjustChanceToGetMoney(val)
+    self.chanceToGetMoney = Helpers.remainAboveZero(self.chanceToGetMoney,val)
+    if self.chanceToGetMoney > 10 then
+        self.chanceToGetMoney = 10
+    end
 end
 
 function Character:cmpBrainState(prevState)
