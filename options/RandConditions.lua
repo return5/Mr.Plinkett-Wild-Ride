@@ -94,22 +94,41 @@ local function checkYoutube(plinkett,rand)
         end
         if rand(10) > 7 then
             plinkett:adjustMoney(15)
-            printBrainMessage(plinkett,"Your youtube videos are popular, they have brought in some donations.",plinkett:adjustBrainValue(1,rand))
+            printBrainMessage(plinkett,"Your youtube videos are popular, they have brought in some donations.\n",plinkett:adjustBrainValue(1,rand))
+            return true
         end
         if rand(10) > 8 then
-            local message <const> = "A viewer of your youtube videos tipped to police off."
+            local message <const> = "A viewer of your youtube videos tipped the police off."
             if not plinkett:checkPoliceMessage(message) then
                 plinkett.policeMessage[#plinkett.policeMessage + 1] = message
+                return true
             end
         end
         if rand(10) > 7 then
             plinkett:changePoliceChance(.2)
         end
     end
+    return true
+end
+
+local function checkMikeJayParts(plinkett,rand)
+    if plinkett.mikeJay and plinkett.isLucid and plinkett.money > 10 and rand(10) > 7 then
+        plinkett:adjustMoney(-10)
+        plinkett:adjustScore(-5)
+        printBrainMessage(plinkett,"Mike and Jay need to order a part to fix your VCR. It cost you 10 dollars.\n",plinkett.adjustBrainValue(-1,rand))
+        return true
+    end
+    if plinkett.mikeJay and not plinkett.isLucid and plinkett.money > 25 and rand(10) > 8 then
+        plinkett:adjustMoney(-25)
+        plinkett:adjustScore(-10)
+        printBrainMessage(plinkett,"Mike and some amish man named sussan said they need 25 dollars for a new quantum harmonizer to fix the VCR. Seems reasonable, so you gave it to them.\n",plinkett:adjustBrainValue(-2,rand))
+        return true
+    end
+    return true
 end
 
 local randCondFuncs <const> = {
-    loseNightCourt,checkVcr,checkWifeNag,checkHookerNag,checkClubGirl,checkYoutube
+    loseNightCourt,checkVcr,checkWifeNag,checkHookerNag,checkClubGirl,checkYoutube,checkMikeJayParts
 }
 
 function RandConditions:checkRandConditions(plinkett,rand,options)

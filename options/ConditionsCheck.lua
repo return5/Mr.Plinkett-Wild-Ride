@@ -126,8 +126,19 @@ local function checkMedicine(plinkett,_,options)
     end
 end
 
+local function checkSS(plinkett,_,options)
+    if plinkett.turnsSinceSS <= 6 then
+        options.SocialSecurity = nil
+        return 0
+    end
+    if plinkett.turnsSinceSS > 6 then
+        options.SocialSecurity = OptionsTable.SocialSecurity
+        return 0
+    end
+end
+
 local checkConditionTbl <const> = {
-    checkHooker, checkMikeJay,checkWife,checkClubGirl,checkNightCourt,checkYoutubes,makeYoutube,checkMedicine
+    checkHooker, checkMikeJay,checkWife,checkClubGirl,checkNightCourt,checkYoutubes,makeYoutube,checkMedicine,checkSS
 }
 
 local function getBrainMessage(plinkett,rand,brainState)

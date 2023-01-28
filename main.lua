@@ -42,7 +42,7 @@ local function printStats(plinkett)
 end
 
 local function loopBody(plinkett,rand,options)
-    plinkett:increaseTurnsSinceMedicine()
+    plinkett:increaseCountsPerTurn()
     printStats(plinkett)
     local brainMessage <const> = ConditionsCheck:checkConditions(plinkett,rand,options)
     Output.write(brainMessage)

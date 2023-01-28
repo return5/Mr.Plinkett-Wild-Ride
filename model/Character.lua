@@ -11,7 +11,7 @@ local Character <const> = {mentalState = 0,money = 10,medicineCount = 1,isLucid 
                            discoveredMissingNightCourt = false,nightCourtMssg = "",totalPizzaRolls = 0,totalBrainMedicine = 0,
                            policeMessage = {"Your neighbors called the cops to do a wellness check on you."},
                            wivesKilled = 0, hookersKilled = 0, clubWomenKilled = 0,totalPizzaRollsWeb = 0,youtubesMade = 0,
-                            turnsSinceMedicine = 10}
+                            turnsSinceMedicine = 10,turnsSinceSS = 10}
 Character.__index = Character
 
 _ENV = Character
@@ -126,6 +126,15 @@ end
 
 function Character:changePoliceChance(val)
     self.policeChance = Helpers.remainAboveZero(self.policeChance,val)
+end
+
+function Character:increaseTurnsSinceSS()
+   self.turnsSinceSS = self.turnsSinceSS + 1
+end
+
+function Character:increaseCountsPerTurn()
+    self:increaseTurnsSinceMedicine()
+    self:increaseTurnsSinceSS()
 end
 
 function Character:new()

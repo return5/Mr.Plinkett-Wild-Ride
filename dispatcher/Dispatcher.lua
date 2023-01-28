@@ -37,8 +37,29 @@ function Dispatcher.sendPizzaRoll(plinkett,rand,options)
 
 end
 
-function Dispatcher.socialSecurity(plinkett,rand,options)
-
+function Dispatcher.socialSecurity(plinkett,rand)
+    if not plinkett.isLucid and rand(10) > 8 then
+        plinkett:adjustScore(-15)
+        return true,"You got confused and lost on the way to the social security office and somehow ended up leading the gay pride parade.\n",plinkett:adjustBrainValue(-1,rand)
+    end
+    if not plinkett.isLucid and rand(10) > 8 then
+        plinkett:adjustScore(15)
+        plinkett:adjustMoney(35)
+        return true,"You were confused and told the social secuirty office you were someone else. Luckily they didn't question this and gave you their substantially larger check.\n",plinkett:adjustBrainValue(1,rand)
+    end
+    if not plinkett.isLucid and rand(100) > 97 then
+        plinkett:adjustScore(-200)
+        plinkett.deathMssg = "You got stabbed to death by a pimp in a dark alley.\n"
+        return false,"A pimp for one of the hookers you previously kidnapped recognized you and stabbed you to death in a dark alley. He also stole your social security check.\n"
+    end
+    if plinkett.isLucid and rand(10) > 7 then
+        plinkett:adjustScore(25)
+        plinkett:adjustMoney(25)
+        return true,"In your unusually lucid state you remember that you are suppose to get a bigger check than usual today.\n",plinkett:adjustBrainValue(1,rand)
+    end
+    plinkett:adjustScore(10)
+    plinkett:adjustMoney(15)
+    return true,"You manage to get to the social security office and get your check then make it safely back home.\n",plinkett:adjustBrainValue(.5,rand)
 end
 
 function Dispatcher.eatPizzaRoll(plinkett,rand)
