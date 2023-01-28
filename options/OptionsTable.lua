@@ -21,5 +21,7 @@ return {
     FindNightCourt = Option:new("Find your lost Night Court tape.",Dispatcher.findNightCourt),
     FightPolice = Option:new("Fight the police. Refuse to go down without a fight.",Dispatcher.fightPolice),
     Surrender = Option:new("Surrender to the police.",Dispatcher.surrender),
-    Quit = Option:new("Quit the game.",Dispatcher.quit)
+    Quit = Option:new("Quit the game.",Dispatcher.quit),
+    EatPizzaRollCops = Option:new("Eat Pizza Rolls.",Dispatcher.eatPizzaRollsCops),
+    NightCourtCops = Option:new("Watch Night Court.",Dispatcher.nightCourtCops)
 }

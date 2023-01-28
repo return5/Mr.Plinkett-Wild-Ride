@@ -5,6 +5,14 @@ Dispatcher.__index = Dispatcher
 
 _ENV = Dispatcher
 
+function Dispatcher.eatPizzaRollsCops(plinkett,rand)
+
+end
+
+function Dispatcher.nightCourtCops(plinkett,rand)
+
+end
+
 function Dispatcher.surrender(plinkett,rand,options)
 
 end
@@ -29,11 +37,34 @@ function Dispatcher.killWoman(plinkett,rand,options)
 
 end
 
-function Dispatcher.killWife(plinkett,rand,options)
-
+function Dispatcher.killWife(plinkett,rand)
+    if rand(10) > 7 then
+        plinkett:adjustScore(25)
+        plinkett:adjustPoliceChance(2)
+        plinkett.wife = false
+        return true,"Your wife just had an unrelated accident.\n",plinkett:adjustBrainValue(-2,rand)
+    end
+    if not plinkett.isLucid and rand(10) > 8 then
+        plinkett:adjustScore(25)
+        plinkett:adjustPoliceChance(4)
+        plinkett.wife = false
+        return true,"You did what the pizza roll told you to do.\n",plinkett:adjustBrainValue(-3,rand)
+    end
+    if not plinkett.isLucid and rand(100) > 97 then
+        plinkett:adjustScore(-55)
+        plinkett:adjustPoliceChance(10)
+        plinkett.policeMessage = {"Your wife called the police after you tried to make her have an accident."}
+        return true,"You tired to do what the pizza rolls want you to do, but your wife ran away.\n",plinkett:adjustBrainValue(-5,rand)
+    end
+    if plinkett.isLucid and rand(100) > 90 then
+        plinkett:adjustScore(-55)
+        plinkett:adjustPoliceChance(10)
+        plinkett.policeMessage = {"Your wife called the police to report what you tried to do."}
+        return true,"You had a lucid moment and realized what you were trying to do. Your wife calls the police\n"
+    end
 end
 
-function Dispatcher.sendPizzaRoll(plinkett,rand,options)
+function Dispatcher.sendPizzaRoll(plinkett,rand)
     if plinkett.pizzaRolls > 0 then
         if rand(10) > 7 then
             plinkett:adjustPizzaRolls(-3)
@@ -72,8 +103,8 @@ function Dispatcher.socialSecurity(plinkett,rand)
     if not plinkett.isLucid and rand(10) > 8 then
         plinkett:adjustScore(15)
         plinkett:adjustMoney(35)
-    --    plinkett.turnsSinceSS = -1
-        return true,"In your confused state you told the social security office you were someone else. Luckily they didn't question this and gave you their substantially larger check.\n",plinkett:adjustBrainValue(1,rand)
+        plinkett.turnsSinceSS = -1
+        return true,"In your confused state you told the social security office you were someone else. Luckily they didn't question this and gave you the substantially larger check.\n",plinkett:adjustBrainValue(1,rand)
     end
     if not plinkett.isLucid and rand(100) > 97 then
         plinkett:adjustScore(-200)
@@ -83,12 +114,12 @@ function Dispatcher.socialSecurity(plinkett,rand)
     if plinkett.isLucid and rand(10) > 7 then
         plinkett:adjustScore(25)
         plinkett:adjustMoney(25)
-     --   plinkett.turnsSinceSS = -1
+        plinkett.turnsSinceSS = -1
         return true,"In your unusually lucid state you remember that you are suppose to get a bigger check than usual today.\n",plinkett:adjustBrainValue(1,rand)
     end
     plinkett:adjustScore(10)
     plinkett:adjustMoney(15)
-    --plinkett.turnsSinceSS = -1
+    plinkett.turnsSinceSS = -1
     return true,"You manage to get to the social security office and get your check then make it safely back home.\n",plinkett:adjustBrainValue(.5,rand)
 end
 

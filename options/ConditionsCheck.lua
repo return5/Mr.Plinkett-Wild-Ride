@@ -92,6 +92,9 @@ local function checkYoutubes(plinkett,rand,options)
     if plinkett.youtubesMade > 0 and rand(10) > 5 then
         options.SendPizzaRoll = OptionsTable.SendPizzaRoll
     end
+    if options.SendPizzaRoll and rand(10) > 7 then
+        options.SendPizzaRoll = nil
+    end
     return 0
 end
 

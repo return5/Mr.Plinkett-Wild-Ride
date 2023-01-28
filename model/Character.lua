@@ -5,11 +5,11 @@ local BadBrainStateMessages <const> = require('messages.BadBrainState')
 local GoodBrainStateMessages <const> = require('messages.GoodBrainState')
 local abs <const> = math.abs
 
-local Character <const> = {mentalState = 0,money = 10,medicineCount = 1,isLucid = true,pizzaRolls = 0,
+local Character <const> = {mentalState = 0,money = 10,medicineCount = 2,isLucid = true,pizzaRolls = 0,
                            hasNightCourt = true,vcrFixed = false,mikeJay = false,deathMssg = "",police = false,hooker = false,
                            wife = false, clubGirl =false,policeChance = 0,score = 0,ss = false,mikeJayDead = false,
                            discoveredMissingNightCourt = false,nightCourtMssg = "",totalPizzaRolls = 0,totalBrainMedicine = 0,
-                           policeMessage = {"Your neighbors called the cops to do a wellness check on you."},
+                           policeMessage = {"Your neighbors called the cops to do a wellness check on you.\n"},
                            wivesKilled = 0, hookersKilled = 0, clubWomenKilled = 0,totalPizzaRollsWeb = 0,youtubesMade = 0,
                             turnsSinceMedicine = 10,turnsSinceSS = 10,chanceToGetMoney = 0}
 Character.__index = Character

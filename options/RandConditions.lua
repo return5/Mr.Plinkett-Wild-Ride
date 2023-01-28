@@ -20,15 +20,27 @@ local function printBrainMessage(plinkett,prevState,mssg,mssg2)
     end
 end
 
+local function resetOptions(options)
+    for k,_ in pairs(options) do
+        options[k] = nil
+    end
+end
+
+local function setOptions(plinkett,options)
+	options.EatPizzaRoll = OptionsTable.EatPizzaRollCops
+	options.NightCourt = OptionsTable.NightCourtCops
+	options.FightPolice = OptionsTable.FightPolice
+    if plinkett.isLucid then
+        options.Surrender = OptionsTable.Surrender
+    end
+end
+
 local function checkPolice(plinkett,rand,options)
     --TODO figure out proper value
     if plinkett.policeChance > rand(10) then
-        options = {
-            EatPizzaRoll = OptionsTable.EatPizzaRoll,
-            NightCourt = OptionsTable.NightCourt,
-            FightPolice = OptionsTable.FightPolice,
-            Surrender = OptionsTable.Surrender
-        }
+        resetOptions(options)
+        setOptions(plinkett,options)
+        plinkett.police = true
         return false,getPoliceMessage(plinkett,rand)
     end
     return true,"What would you like to do today Mr.Plinkett?\n"
