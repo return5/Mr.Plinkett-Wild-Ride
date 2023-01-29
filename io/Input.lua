@@ -1,4 +1,4 @@
-local io <const> = io
+local read <const> = io.read
 
 local Input <const> = {}
 Input.__index = Input
@@ -6,15 +6,15 @@ Input.__index = Input
 _ENV = Input
 
 function Input.readNumber()
-    return io.read("n")
+    return read("n")
 end
 
 function Input.readString()
-    return io.read("l")
+    return read("l")
 end
 
 function Input.readLine()
-    return io.read("L")
+    return read("L")
 end
 
 return Input

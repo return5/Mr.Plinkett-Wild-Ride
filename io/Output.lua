@@ -1,4 +1,4 @@
-local io <const> = io
+local write <const> = io.write
 local unpack <const> = table.unpack
 local Input <const> = require('io.Input')
 
@@ -8,11 +8,11 @@ Output.__index = Output
 _ENV = Output
 
 function Output.write(...)
-    io.write(unpack({...}))
+    write(unpack({...}))
 end
 
 function Output.clearScrn()
-    io.write("\027[H\027[2J\027[3J")
+    write("\027[H\027[2J\027[3J")
 end
 
 function Output.writeAndWait(...)

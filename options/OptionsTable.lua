@@ -23,5 +23,9 @@ return {
     Surrender = Option:new("Surrender to the police.",Dispatcher.surrender),
     Quit = Option:new("Quit the game.",Dispatcher.quit),
     EatPizzaRollCops = Option:new("Eat Pizza Rolls.",Dispatcher.eatPizzaRollsCops),
-    NightCourtCops = Option:new("Watch Night Court.",Dispatcher.nightCourtCops)
+    NightCourtCops = Option:new("Watch Night Court.",Dispatcher.nightCourtCops),
+	FightNadine = Option:new("Fight Nadine",Dispatcher.fightNadine),
+	SurrenderNadine = Option:new("Surrender to Nadine",Dispatcher.surrenderNadine),
+	EatPizzaRollsNadine = Option:new("Eat Pizza Rolls",Dispatcher.eatPizzaRollsNadine),
+	NightCourtNadine = Option:new("Watch NightCourt",Dispatcher.nightCourtNadine),
 }

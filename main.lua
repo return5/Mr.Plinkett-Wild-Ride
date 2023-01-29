@@ -36,6 +36,7 @@ local function makeOptions()
         Quit = OptionsTable.Quit,
     }
 end
+
 local function printStats(plinkett)
     Output.clearAndPrint("score: ",plinkett.score,", money: ",plinkett.money,", brain medicine: ",plinkett.medicineCount,
             ", pizza rolls: ",plinkett.pizzaRolls,", Mental state: ",plinkett.mentalState,"\n")

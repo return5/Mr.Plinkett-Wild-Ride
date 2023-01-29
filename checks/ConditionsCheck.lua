@@ -7,7 +7,7 @@ ConditionCheck.__index = ConditionCheck
 
 _ENV = ConditionCheck
 
-local function checkHooker(plinkett,rand,options)
+local function checkHooker(plinkett,options,rand)
     if plinkett.hooker then
         plinkett:changePoliceChance(1)
         if not options.KillHooker then
@@ -28,7 +28,7 @@ local function checkHooker(plinkett,rand,options)
     return 0
 end
 
-local function checkClubGirl(plinkett,rand,options)
+local function checkClubGirl(plinkett,options,rand)
     if plinkett.clubGirl then
         plinkett:changePoliceChance(1)
         if not options.KillWoman then
@@ -49,7 +49,7 @@ local function checkClubGirl(plinkett,rand,options)
     return 0
 end
 
-local function checkWife(plinkett,rand,options)
+local function checkWife(plinkett,options,rand)
     if plinkett.wife then
         if not options.KillWife then
             if rand(10) > 8 then
@@ -69,7 +69,7 @@ local function checkWife(plinkett,rand,options)
     return 0
 end
 
-local function checkMikeJay(plinkett,rand,options)
+local function checkMikeJay(plinkett,options,rand)
     if plinkett.mikeJay then
         if options.CallMikeJay then
             options.CallMikeJay = nil
@@ -88,7 +88,7 @@ local function checkMikeJay(plinkett,rand,options)
     return 0
 end
 
-local function checkYoutubes(plinkett,rand,options)
+local function checkYoutubes(plinkett,options,rand)
     if plinkett.youtubesMade > 0 and rand(10) > 5 then
         options.SendPizzaRoll = OptionsTable.SendPizzaRoll
     end
@@ -98,7 +98,7 @@ local function checkYoutubes(plinkett,rand,options)
     return 0
 end
 
-local function makeYoutube(plinkett,rand,options)
+local function makeYoutube(plinkett,options,rand)
     if not options.YoutubeVideo and plinkett.mentalState < 0 and rand(10) > 6 then
         options.YoutubeVideo = OptionsTable.YoutubeVideo
     elseif options.YoutubeVideo and rand(10) > 6 then
@@ -109,7 +109,7 @@ local function makeYoutube(plinkett,rand,options)
     return 0
 end
 
-local function checkNightCourt(plinkett,_,options)
+local function checkNightCourt(plinkett,options)
     if plinkett.discoveredMissingNightCourt then
         options.FindNightCourt = OptionsTable.FindNightCourt
         return 0
@@ -118,7 +118,7 @@ local function checkNightCourt(plinkett,_,options)
     return 0
 end
 
-local function checkMedicine(plinkett,_,options)
+local function checkMedicine(plinkett,options)
     if plinkett.turnsSinceMedicine <= 3 then
         options.BrainMedicine = nil
         return 0
@@ -129,7 +129,7 @@ local function checkMedicine(plinkett,_,options)
     end
 end
 
-local function checkSS(plinkett,_,options)
+local function checkSS(plinkett,options)
     if plinkett.turnsSinceSS <= 6 then
         options.SocialSecurity = nil
         return 0
@@ -140,10 +140,6 @@ local function checkSS(plinkett,_,options)
     end
 end
 
-local checkConditionTbl <const> = {
-    checkHooker, checkMikeJay,checkWife,checkClubGirl,checkNightCourt,checkYoutubes,makeYoutube,checkMedicine,checkSS
-}
-
 local function getBrainMessage(plinkett,rand,brainState)
     local prevState <const> = plinkett.mentalState
     local message <const> = plinkett:adjustBrainValue(brainState,rand)
@@ -153,10 +149,14 @@ local function getBrainMessage(plinkett,rand,brainState)
     return ""
 end
 
+local checkConditionTbl <const> = {
+    checkHooker, checkMikeJay,checkWife,checkClubGirl,checkNightCourt,checkYoutubes,makeYoutube,checkMedicine,checkSS
+}
+
 function ConditionCheck:checkConditions(plinkett,rand,options)
     local brainState = 0
     for i=1,#checkConditionTbl,1 do
-        brainState = brainState + checkConditionTbl[i](plinkett,rand,options)
+        brainState = brainState + checkConditionTbl[i](plinkett,options,rand)
     end
     return getBrainMessage(plinkett,rand,brainState)
 end
