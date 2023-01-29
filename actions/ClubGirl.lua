@@ -54,28 +54,39 @@ local function kidnapSuccess(plinkett,rand)
     plinkett:adjustScore(25)
     plinkett:adjustPoliceChance(1)
     plinkett.clubGirl = true
-    plinkett.policeMessage.clubGirlKidnapped = "Someone reported the clubGirl missing."
-    return true,"You find a girl outside a club and throw her in your trunk.  "
+    plinkett.policeMessage.clubGirlKidnapped = "Someone reported the clubGirl missing.\n"
+    return true,"You find a girl outside a club and throw her in your trunk. \n",plinkett:adjustBrainValue(-1,rand)
 end
 
 local function kidnapFail(plinkett,rand)
-
+    plinkett:adjustScore(-25)
+   return true,"You failed to find a suitable woman to kidnap.\n"
 end
 
 local function kidnapCrazyFail(plinkett,rand)
-
+    plinkett:adjustScore(-25)
+    plinkett:adjustPoliceChance(2)
+    plinkett.policeMessage.clubGirlKidnapped = ""
+    return true,"You tried to kidnap a woman outside a club, She saw how crazy you are and yelled something about get away form me you creepy old weird sex pervert.\n.",plinkett:adjustBrainValue(-1,rand)
 end
 
 local function kidnapCrazySuccess(plinkett,rand)
-
+    plinkett:adjustScore(50)
+    plinkett:adjustPoliceChance(2)
+    plinkett.clubGirl = true
+    plinkett.policeMessage.clubGirlKidnapped = "The CDC tracked the source of the macarena virus infection back to your house.They are here with the police.\n"
+    return true,"You go to the club and infect everyone with the macarena virus.You convince a woman to come home with you to find a cure.\n",plinkett:adjustBrainValue(-2,rand)
 end
 
 local function kidnapDeath(plinkett)
-
+    plinkett:adjustScore(-100)
+    plinkett.deathMssg("You died while driving to kidnap a woman form the local club.\n")
+    return false,"You were driving erratically and thought you saw someone glowing in the dark. You tried to run over them, but turns out it was a street lamp. You crashed your car and died.\n"
 end
 
 ClubGirl.kidnap = {
-   kidnapSuccess,kidnapCrazySuccess,kidnapCrazyFail,kidnapFail,kidnapDeath
+   kidnapSuccess,kidnapSuccess,kidnapSuccess,kidnapSuccess,kidnapSuccess,kidnapCrazySuccess,kidnapCrazySuccess,
+   kidnapCrazyFail,kidnapCrazyFail,kidnapFail,kidnapFail,kidnapFail,kidnapDeath
 }
 
 return ClubGirl
