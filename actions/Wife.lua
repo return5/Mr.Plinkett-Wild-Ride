@@ -12,7 +12,7 @@ end
 
 local function crazyKill(plinkett,rand)
 	plinkett:adjustScore(25)
-	plinkett:adjustPoliceChance(4)
+	plinkett:adjustPoliceChance(3)
 	plinkett.wife = false
 	plinkett:killWife()
 	plinkett.policeMessage.wife = "The police found your wife's dismembered body.\n"

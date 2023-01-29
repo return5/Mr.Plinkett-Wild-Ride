@@ -50,8 +50,8 @@ function Dispatcher.findNightCourt(plinkett,rand,options)
 
 end
 
-function Dispatcher.killMikeJay(plinkett,rand,options)
-    return MikeJay
+function Dispatcher.killMikeJay(plinkett,rand)
+    return MikeJay.kill[rand(#MikeJay.kill)](plinkett,rand)
 end
 
 function Dispatcher.cocktailWaitress(plinkett,rand)
