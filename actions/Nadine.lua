@@ -7,9 +7,9 @@ Nadine.__index = Nadine
 _ENV = Nadine
 
 local function resetOptions(options)
-    for k,_ in pairs(options) do
-        options[k] = nil
-    end
+	for k,_ in pairs(options) do
+		options[k] = nil
+	end
 end
 
 function Nadine.fightNadine(plinkett,rand,options)
@@ -30,13 +30,13 @@ end
 
 
 function Nadine.setNadineOptions(options,plinkett)
-    resetOptions(options)
-    options.FightNadine = OptionsTable.FightNadine
-    options.surrenderNadine = OptionsTable.SurrenderNadine
-    options.EatPizzaRollsNadine = OptionsTable.EatPizzaRollsNadine
-    if plinkett.vcrFixed and plinkett.hasNightCourt then
-        options.WatchNightCourtNadine = OptionsTable.NightCourtNadine
-    end
+	resetOptions(options)
+	options.FightNadine = OptionsTable.FightNadine
+	options.surrenderNadine = OptionsTable.SurrenderNadine
+	options.EatPizzaRollsNadine = OptionsTable.EatPizzaRollsNadine
+	if plinkett.vcrFixed and plinkett.hasNightCourt then
+		options.WatchNightCourtNadine = OptionsTable.NightCourtNadine
+	end
 end
 
 return Nadine

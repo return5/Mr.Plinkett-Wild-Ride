@@ -6,15 +6,15 @@ Input.__index = Input
 _ENV = Input
 
 function Input.readNumber()
-    return read("n")
+	return read("n")
 end
 
 function Input.readString()
-    return read("l")
+	return read("l")
 end
 
 function Input.readLine()
-    return read("L")
+	return read("L")
 end
 
 return Input

@@ -8,23 +8,23 @@ Output.__index = Output
 _ENV = Output
 
 function Output.write(...)
-    write(unpack({...}))
+	write(unpack({...}))
 end
 
 function Output.clearScrn()
-    write("\027[H\027[2J\027[3J")
+	write("\027[H\027[2J\027[3J")
 end
 
 function Output.writeAndWait(...)
-    Output.write(...)
-    Input.readLine()
-    Input.readLine()
+	Output.write(...)
+	Input.readLine()
+	Input.readLine()
 
 end
 
 function Output.clearAndPrint(...)
-    Output.clearScrn()
-    Output.write(...)
+	Output.clearScrn()
+	Output.write(...)
 end
 
 return Output
