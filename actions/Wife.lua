@@ -6,7 +6,7 @@ _ENV = Wife
 local function crazyKillFail(plinkett,rand)
     plinkett:adjustScore(-55)
     plinkett:adjustPoliceChance(10)
-    plinkett.policeMessage = {"Your wife called the police after you tried to make her have an accident.\n"}
+    plinkett.policeMessage = {wife = "Your wife called the police after you tried to make her have an accident.\n"}
     return true,"You tired to do what the pizza rolls want you to do, but your wife ran away.\n",plinkett:adjustBrainValue(-5,rand)
 end
 
@@ -15,6 +15,7 @@ local function crazyKill(plinkett,rand)
     plinkett:adjustPoliceChance(4)
     plinkett.wife = false
     plinkett:killWife()
+    plinkett.policeMessage.wife = "The police found your wife's dismembered body.\n"
     return true,"You did what the pizza roll told you to do.\n",plinkett:adjustBrainValue(-3,rand)
 end
 
@@ -23,13 +24,14 @@ local function successKill(plinkett,rand)
     plinkett:adjustPoliceChance(2)
     plinkett.wife = false
     plinkett:killWife()
+    plinkett.policeMessage.wife = "The police investigated your wife's accident and found it very suspicious.\n"
     return true,"Your wife just had an unrelated accident.\n",plinkett:adjustBrainValue(-2,rand)
 end
 
 local function lucidFailed(plinkett)
     plinkett:adjustScore(-55)
     plinkett:adjustPoliceChance(10)
-    plinkett.policeMessage = {"Your wife called the police to report what you tried to do.\n"}
+    plinkett.policeMessage = {wife = "Your wife called the police to report what you tried to do.\n"}
     return true,"You had a lucid moment and realized what you were trying to do. Your wife calls the police\n"
 end
 

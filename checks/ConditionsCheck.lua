@@ -43,7 +43,7 @@ local function checkClubGirl(plinkett,options,rand)
     end
     --if plinkett hasnt already kidnapped a club girl and he doesnt have a wife and hasnt kidnapped a hooker,
     --and if he doesnt already have the option to do those two and his mental state is warped.
-    if  not plinkett.isLucid and not plinkett.wife and not plinkett.hooker and  not options.KidNapClub and not options.KidNapHooker and not options.CocktailWaitress and rand(10) > 7 then
+    if  not plinkett.isLucid and not plinkett.wife and not plinkett.hooker and not options.KidNapClub and not options.KidNapHooker and not options.CocktailWaitress and rand(10) > 7 then
         options.KidNapClub = OptionsTable.KidnapClub
     end
     return 0

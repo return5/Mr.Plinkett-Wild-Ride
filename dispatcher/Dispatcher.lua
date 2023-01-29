@@ -58,12 +58,12 @@ function Dispatcher.cocktailWaitress(plinkett,rand,options)
 
 end
 
-function Dispatcher.kidnapClub(plinkett,rand,options)
-
+function Dispatcher.kidnapClub(plinkett,rand)
+    return ClubGirl.kidnap[rand(ClubGirl.kidnap)](plinkett,rand)
 end
 
-function Dispatcher.kidnapHooker(plinkett,rand,options)
-
+function Dispatcher.kidnapHooker(plinkett,rand)
+    return Hooker.kidnap[rand(Hooker.kidnap)](plinkett,rand)
 end
 
 function Dispatcher.killHooker(plinkett,rand,options)
@@ -80,8 +80,9 @@ end
 
 function Dispatcher.sendPizzaRoll(plinkett,rand)
     if plinkett.pizzaRolls == 0 then
-        PizzaRolls.emptySend[rand(#PizzaRolls.emptySend)](plinkett,rand)
+        return PizzaRolls.emptySend[rand(#PizzaRolls.emptySend)](plinkett,rand)
     end
+    return PizzaRolls.send[rand(#PizzaRolls.send)](plinkett,rand)
 end
 
 function Dispatcher.socialSecurity(plinkett,rand)
@@ -115,14 +116,7 @@ function Dispatcher.brainMedicine(plinkett,rand)
 end
 
 function Dispatcher.callMikeJay(plinkett,rand)
-    if plinkett.mikeJayDead then
-        return true,"You went to call Mike and Jay to fix your VCR but remembered that you killed them.This brings a smile to your face\n", plinkett:adjustBrainValue(2,rand)
-    end
-    if plinkett.mikeJay then
-        return true,"You try to call Mike and Jay but you later realize they are already at your house.This darkens your mood.\n",plinkett:adjustBrainValue(-1,rand)
-    end
-    local option <const> = MikeJay.call[plinkett.isLucid][rand(#MikeJay.call[plinkett.isLucid])]
-    return option.func(plinkett,rand),option.message
+    return MikeJay.call(plinkett,rand)
 end
 
 function Dispatcher.quit(plinkett)

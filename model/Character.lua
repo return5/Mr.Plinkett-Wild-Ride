@@ -9,7 +9,7 @@ local Character <const> = {mentalState = 0,money = 10,medicineCount = 2,isLucid 
                            hasNightCourt = true,vcrFixed = false,mikeJay = false,deathMssg = "",police = false,hooker = false,
                            wife = false, clubGirl =false,policeChance = 0,score = 0,ss = false,mikeJayDead = false,
                            discoveredMissingNightCourt = false,nightCourtMssg = "",totalPizzaRolls = 0,totalBrainMedicine = 0,
-                           policeMessage = {"Your neighbors called the cops to do a wellness check on you.\n"},
+                           policeMessage = {wellness = "Your neighbors called the cops to do a wellness check on you.\n"},
                            wivesKilled = 0, hookersKilled = 0, clubWomenKilled = 0,totalPizzaRollsWeb = 0,youtubesMade = 0,
                             turnsSinceMedicine = 10,turnsSinceSS = 10,chanceToGetMoney = 0}
 Character.__index = Character
@@ -143,6 +143,14 @@ end
 function Character:increaseCountsPerTurn()
     self:increaseTurnsSinceMedicine()
     self:increaseTurnsSinceSS()
+end
+
+function Character:getPoliceMessage(rand)
+    local tbl <const> = {}
+    for k,_ in pairs(self.policeMessage) do
+        tbl[#tbl + 1] = k
+    end
+    return self.policeMessage[tbl[rand(#tbl)]]
 end
 
 function Character:new()

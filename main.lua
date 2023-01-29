@@ -25,8 +25,8 @@ local Character <const> = require('model.Character')
 local OptionsTable <const> = require('options.OptionsTable')
 local Output <const> = require('io.Output')
 local Input <const> = require('io.Input')
-local ConditionsCheck <const> = require('options.ConditionsCheck')
-local RandConditions <const> = require('options.RandConditions')
+local ConditionsCheck <const> = require('checks.ConditionsCheck')
+local RandConditions <const> = require('checks.RandConditions')
 
 local function printOptions(options)
     local keys <const> = {}

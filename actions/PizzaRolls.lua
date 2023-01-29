@@ -48,7 +48,6 @@ PizzaRolls.emptySend = {
     emptySendPizzaRolls, emptySendPizzaRolls, emptySendPizzaRolls, emptySendPizzaRolls, emptySendPizzaRolls
 }
 
-
 PizzaRolls.send = {
     sendPizzaRolls,sendPizzaRolls,sendPizzaRolls,sendPizzaRolls,sendLotsPizzaRolls,sendLotsPizzaRolls,sendPizzaRollsCut,
     sendPizzaRollsCut,sendPizzaRollsAte,sendPizzaRollsAte
