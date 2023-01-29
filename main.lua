@@ -1,4 +1,3 @@
-
 --[[
     Plinkett's wild ride. A simple, bare bones text based adventure game where you play as Red Letter Media's character Mr. Harry S. Plinkett.
     see youtube.com/@RedLetterMedia for more information on Red Letter Media and Mr. Plinkett.

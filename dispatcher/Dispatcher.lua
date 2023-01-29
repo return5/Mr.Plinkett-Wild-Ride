@@ -15,35 +15,35 @@ Dispatcher.__index = Dispatcher
 _ENV = Dispatcher
 
 function Dispatcher.fightNadine(plinkett,rand,options)
-	Nadine.fightNadine(plinkett,rand,options)
+	return Nadine.fightNadine(plinkett,rand,options)
 end
 
 function Dispatcher.surrenderNadine(plinkett,rand,options)
-	Nadine.surrenderNadine(plinkett,rand,options)
+	return Nadine.surrenderNadine(plinkett,rand,options)
 end
 
 function Dispatcher.eatPizzaRollsNadine(plinkett,rand,options)
-	Nadine.eatPizzaRollsNadine(plinkett,rand,options)
+	return Nadine.eatPizzaRollsNadine(plinkett,rand,options)
 end
 
 function Dispatcher.nightCourtNadine(plinkett,rand,options)
-	Nadine.nightCourtNadine(plinkett,rand,options)
+	return Nadine.nightCourtNadine(plinkett,rand,options)
 end
 
 function Dispatcher.eatPizzaRollsCops(plinkett,rand)
-	Police.eatPizzaRollsCops(plinkett,rand)
+	return Police.eatPizzaRollsCops(plinkett,rand)
 end
 
 function Dispatcher.nightCourtCops(plinkett,rand)
-	Police.nightCourtCops(plinkett,rand)
+	return Police.nightCourtCops(plinkett,rand)
 end
 
 function Dispatcher.surrender(plinkett,rand,options)
-	Police.surrender(plinkett,rand,options)
+	return Police.surrender(plinkett,rand,options)
 end
 
 function Dispatcher.fightPolice(plinkett,rand,options)
-	Police.fightPolice(plinkett,rand,options)
+	return Police.fightPolice(plinkett,rand,options)
 end
 
 function Dispatcher.findNightCourt(plinkett,rand,options)
@@ -54,8 +54,8 @@ function Dispatcher.killMikeJay(plinkett,rand,options)
 
 end
 
-function Dispatcher.cocktailWaitress(plinkett,rand,options)
-
+function Dispatcher.cocktailWaitress(plinkett,rand)
+    return Wife.trumpCasino(plinkett,rand)
 end
 
 function Dispatcher.kidnapClub(plinkett,rand)
