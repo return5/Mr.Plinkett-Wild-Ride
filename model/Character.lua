@@ -121,13 +121,6 @@ function Character:eatPizzaRolls(val)
 	self.totalPizzaRolls = self.totalPizzaRolls + abs(prev - self.pizzaRolls)
 end
 
-function Character:checkPoliceMessage(message)
-	for i=1,#self.policeMessage,1 do
-		if self.policeMessage[i] == message then return true end
-	end
-	return false
-end
-
 function Character:adjustVideos(val)
 	self.youtubesMade = self.youtubesMade + val
 end

@@ -31,7 +31,6 @@ local callTbl <const> = {
 	}
 }
 
-
 function MikeJay.call(plinkett,rand)
 	if plinkett.mikeJayDead then
 		return true,"You went to call Mike and Jay to fix your VCR but remembered that you killed them.This brings a smile to your face\n", plinkett:adjustBrainValue(2,rand)
@@ -44,25 +43,40 @@ function MikeJay.call(plinkett,rand)
 end
 
 local function killSuccess(plinkett,rand)
-
+	plinkett:adjustScore(25)
+	plinkett.mikeJay = false
+	plinkett.mikeJayDead = true
+	plinkett:changePoliceChance(1)
+	plinkett.policeMessage.mikeJay = "The police discovered the bodies of Mike and Jay.Investigating the repair shop they found receipts which lead them to your house.\n"
+	return true,"You finally had enough with those two not fixing your VCR and taking all your money. You killed them both and it felt very good.\n",plinkett:adjustBrainValue(4,rand)
 end
 
-local function killFailed(plinkett,rand)
-
+local function killFailed(plinkett)
+	plinkett:adjustScore(-15)
+	return true,"You went to the living room to kill Mike and Jay, but they aren't here at the moment.\n"
 end
 
 local function killedCrazySuccess(plinkett,rand)
-
+	plinkett:adjustScore(50)
+	plinkett:adjustMoney(15)
+	plinkett.mikeJay = false
+	plinkett.mikeJayDead = true
+	plinkett:changePoliceChance(2)
+	plinkett.policeMessage.mikeJay = "You called a plumber to fix your clogged bathtub drain. The plumber found the dissolved remains of Mike and Jay and quickly called the police.\n"
+	return true,"The pizza Rolls gave you a tip that the fat guy and amish lady don't like Night Court. This crime can 't go unpunished, you know what needs to be done.After the deed was done, you found 15 dollars in their pokcets.\n",plinkett:adjustBrainValue(4,rand)
 end
 
 local function killedCrazyFail(plinkett,rand)
-
+	plinkett:adjustScore(-25)
+	plinkett:adjustMoney(-20)
+	return true,"You tried to kill Mike and the other one, but instead they demanded you give them money to go see the new terminator movie.You don't remember any of this\n",plinkett:adjustBrainValue(-1,rand)
 end
 
 local function killedFailPolice(plinkett,rand)
-
+	plinkett:adjustScore(-50)
+	plinkett.policeMessage = {mikeJay = "The fat guy and sussan called the cops on you. You swear you'll get your revenge on them.\n"}
+	return false,"You planned to kill Mike and JAy but they slowly caught on to this fact. the next day they called the police.\n",plinkett:adjustBrainValue(-2,rand)
 end
-
 
 
 MikeJay.kill = {
