@@ -1,3 +1,26 @@
+
+--[[
+    Plinkett's wild ride. A simple, bare bones text based adventure game where you play as Red Letter Media's character Mr. Harry S. Plinkett.
+    see youtube.com/@RedLetterMedia for more information on Red Letter Media and Mr. Plinkett.
+    note: Red Letter Media did not create this game, nor have they endorsed this game.
+    this game is a fan creation which in all probability RLM knows nothing about and probably never will.
+
+    Copyright (C) <2023>  <return5>
+
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program.  If not, see <https://www.gnu.org/licenses/>.
+--]]
+
 local Character <const> = require('model.Character')
 local OptionsTable <const> = require('options.OptionsTable')
 local Output <const> = require('io.Output')
