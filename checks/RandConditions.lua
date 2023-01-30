@@ -57,11 +57,12 @@ local function loseNightCourt(plinkett,rand)
 end
 
 local function checkVcr(plinkett,rand)
-	if plinkett.mikeJay and not plinkett.vcrFixed and rand(10) > 9 then
+	if plinkett.mikeJay and not plinkett.vcrFixed and rand(20) > 19 then
 		plinkett.vcrFixed = true
-		plinkett:adjustMoney(-10000)
+		plinkett.money = plinkett.money -10000
+		local prevState <const> = plinkett.mentalState
 		local mssg <const> = plinkett:adjustBrainValue(50,rand)
-		printBrainMessage("Against all odds Mike and Jay actually fixed your VCR. It only took 12 years and 10,000 dollars, but it was worth it.\n",mssg)
+		printBrainMessage(plinkett,prevState,"Against all odds Mike and Jay actually fixed your VCR. It only took 12 years and 10,000 dollars, but it was worth it.\n",mssg)
 	end
 	return true
 end

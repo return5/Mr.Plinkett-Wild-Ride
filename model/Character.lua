@@ -63,7 +63,7 @@ function Character:adjustBrainValue(val,rand)
 end
 
 function Character:adjustMoney(val)
-	self.money = self.money + val
+	self.money = Helpers.remainAboveZero(self.money,val)
 end
 
 function Character:changeScore(val)
