@@ -57,7 +57,7 @@ local function loseNightCourt(plinkett,rand)
 end
 
 local function checkVcr(plinkett,rand)
-	if plinkett.mikeJay and not plinkett.vcrFixed and rand(100) > 95 then
+	if plinkett.mikeJay and not plinkett.vcrFixed and rand(10) > 9 then
 		plinkett.vcrFixed = true
 		plinkett.adjustMoney(-10000)
 		local mssg <const> = plinkett.adjustBrainValue(50,rand)
