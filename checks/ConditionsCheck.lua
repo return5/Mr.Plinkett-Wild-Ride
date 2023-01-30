@@ -56,6 +56,7 @@ local function checkWife(plinkett,options,rand)
 				options.KillWife = OptionsTable.KillWife
 			end
 		end
+		options.CocktailWaitress = nil
 		return -1
 	end
 	if options.KillWife then
