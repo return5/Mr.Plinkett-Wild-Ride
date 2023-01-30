@@ -51,10 +51,8 @@ end
 
 local function checkWife(plinkett,options,rand)
 	if plinkett.wife then
-		if not options.KillWife then
-			if rand(10) > 8 then
-				options.KillWife = OptionsTable.KillWife
-			end
+		if not options.KillWife and plinkett.mentalState < 0 and rand(10) > 8 then
+			options.KillWife = OptionsTable.KillWife
 		end
 		options.CocktailWaitress = nil
 		return -1

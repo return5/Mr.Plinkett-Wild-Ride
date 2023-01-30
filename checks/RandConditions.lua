@@ -105,7 +105,8 @@ local function checkYoutube(plinkett,rand)
 		if rand(10) <= plinkett.chanceToGetMoney then
 			plinkett:adjustMoney(15)
 			local prevState <const> = plinkett.mentalState
-			printBrainMessage(plinkett,prevState,"Your youtube videos are popular, they have brought in some donations.\n",plinkett:adjustBrainValue(1,rand))
+			local mssg <const> = plinkett:adjustBrainValue(1,rand)
+			printBrainMessage(plinkett,prevState,"Your youtube videos are popular, they have brought in some donations.\n",mssg)
 			return true
 		end
 		if rand(10) <= plinkett.policeChance then
@@ -126,15 +127,17 @@ local function checkMikeJayParts(plinkett,rand)
 	if plinkett.mikeJay and plinkett.isLucid and plinkett.money > 10 and rand(10) > 7 then
 		plinkett:adjustMoney(-10)
 		local prevState <const> = plinkett.mentalState
-		plinkett:adjustScore(-5)plinkett:adjustBrainValue(-1,rand)
-		printBrainMessage(plinkett,prevState,"Mike and Jay need to order a part to fix your VCR. It cost you 10 dollars.\n",plinkett.adjustBrainValue(-1,rand))
+		plinkett:adjustScore(-5)
+		local mssg <const> = plinkett.adjustBrainValue(-1,rand)
+		printBrainMessage(plinkett,prevState,"Mike and Jay need to order a part to fix your VCR. It cost you 10 dollars.\n",mssg)
 		return true
 	end
 	if plinkett.mikeJay and not plinkett.isLucid and plinkett.money > 25 and rand(10) > 8 then
 		plinkett:adjustMoney(-25)
 		plinkett:adjustScore(-10)
 		local prevState <const> = plinkett.mentalState
-		printBrainMessage(plinkett,prevState,"Mike and some amish man named sussan said they need 25 dollars for a new quantum harmonizer to fix the VCR. Seems reasonable, so you gave it to them.\n",plinkett:adjustBrainValue(-2,rand))
+		local mssg <const> = plinkett:adjustBrainValue(-2,rand)
+		printBrainMessage(plinkett,prevState,"Mike and some amish man named sussan said they need 25 dollars for a new quantum harmonizer to fix the VCR. Seems reasonable, so you gave it to them.\n",mssg)
 		return true
 	end
 	return true
