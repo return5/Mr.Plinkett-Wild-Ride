@@ -74,7 +74,7 @@ end
 
 local function killedFailPolice(plinkett,rand)
 	plinkett:adjustScore(-50)
-	plinkett:adjustPoliceChance(10)
+	plinkett:changePoliceChance(10)
 	plinkett.policeMessage = {mikeJay = "The fat guy and sussan called the cops on you. You swear you'll get your revenge on them.\n"}
 	return true,"You planned to kill Mike and Jay but they slowly caught on to this fact. the next day they called the police.\n",plinkett:adjustBrainValue(-2,rand)
 end

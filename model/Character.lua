@@ -70,7 +70,7 @@ function Character:changeScore(val)
 	self.score = Helpers.remainAboveZero(self.score,val)
 end
 
-function Character:ChangePoliceChance(val)
+function Character:changePoliceChance(val)
 	self.policeChance = Helpers.remainAboveZero(self.policeChance,val)
 end
 
