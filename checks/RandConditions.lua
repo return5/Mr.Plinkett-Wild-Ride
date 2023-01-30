@@ -59,8 +59,8 @@ end
 local function checkVcr(plinkett,rand)
 	if plinkett.mikeJay and not plinkett.vcrFixed and rand(10) > 9 then
 		plinkett.vcrFixed = true
-		plinkett.adjustMoney(-10000)
-		local mssg <const> = plinkett.adjustBrainValue(50,rand)
+		plinkett:adjustMoney(-10000)
+		local mssg <const> = plinkett:adjustBrainValue(50,rand)
 		printBrainMessage("Against all odds Mike and Jay actually fixed your VCR. It only took 12 years and 10,000 dollars, but it was worth it.\n",mssg)
 	end
 	return true
@@ -128,7 +128,7 @@ local function checkMikeJayParts(plinkett,rand)
 		plinkett:adjustMoney(-10)
 		local prevState <const> = plinkett.mentalState
 		plinkett:adjustScore(-5)
-		local mssg <const> = plinkett.adjustBrainValue(-1,rand)
+		local mssg <const> = plinkett:adjustBrainValue(-1,rand)
 		printBrainMessage(plinkett,prevState,"Mike and Jay need to order a part to fix your VCR. It cost you 10 dollars.\n",mssg)
 		return true
 	end

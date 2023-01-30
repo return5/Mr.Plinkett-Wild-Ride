@@ -60,7 +60,7 @@ end
 
 local function kidnapDeath(plinkett)
 	plinkett:adjustScore(-100)
-	plinkett.deathMssg("You were stabbed to death by a crack whore.You should have watched Surviving Edged Weapons.\n")
+	plinkett:deathMssg("You were stabbed to death by a crack whore.You should have watched Surviving Edged Weapons.\n")
 	return false,"You tried to kidnap a hooker, but she took out a lipstick shaped knife and stabbed you. You bleed to death in the gutter wondering how your life got to this point\n"
 end
 

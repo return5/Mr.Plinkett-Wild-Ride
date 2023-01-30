@@ -8,7 +8,7 @@ _ENV = Nadine
 
 local function fightSuccess(plinkett,rand,options)
 	plinkett:adjustScore(200)
-	plinkett.killHooker()
+	plinkett:killHooker()
 	Helpers.resetOptions(options)
 	Helpers.setOptions(plinkett,options)
 	return true,"In an unlikely turn of events, you managed to over power her and turn her into yet another dead hooker at the hands of Mr.Plinkett.\n",plinkett:adjustBrainValue(-1,rand)

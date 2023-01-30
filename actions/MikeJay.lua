@@ -15,7 +15,7 @@ local callTbl <const> = {
 		Option:new("You tried to call Mike and Jay but accidentally called a nigerian scammer and sent him some money. ",
 				function(plinkett,rand) plinkett.mikeJay = false; plinkett:adjustMoney(-50); plinkett:adjustScore(-10); return true,plinkett:worsenBrainState(-1,rand) end),
 		Option:new("You try to call Mike and Jay but accidentally called a trans help hotline. You are now more confused than ever.",
-				function(plinkett,rand) plinkett.mikeJay = false;plinkett:adjustScore(-5); return true,plinkett:worsenBrainState(1,rand) end)
+				function(plinkett,rand) plinkett.mikeJay = false;plinkett:adjustScore(-5); return true,plinkett:worsenBrainState(-1,rand) end)
 	},
 	[false] = {
 		Option:new("You tried to call Mike and Jay but the phone tried to kill you so you shot it.",function(plinkett) plinkett.mikeJay = false; return true end),
@@ -27,7 +27,7 @@ local callTbl <const> = {
 		Option:new("You call Mike and Jay. They recognize how feeble your mind is right now and rush over to take advantage of your dementia.",
 				function(plinkett) plinkett.mikeJay = true; plinkett:adjustScore(-20);return true end),
 		Option:new("You accidentally call a sex hotline. It takes you over an hour to realize what is going on before you hang up.",
-				function(plinkett) plinkett.mikeJay = false; plinkett.adjustMoney(-60); plinkett:adjustScore(-25);return true end)
+				function(plinkett) plinkett.mikeJay = false; plinkett:adjustMoney(-60); plinkett:adjustScore(-25);return true end)
 	}
 }
 

@@ -117,7 +117,7 @@ end
 
 local function crazyFailedGamble(plinkett,rand)
 	plinkett:adjustScore(-25)
-	plinkett.adjustMoney(-1000000)
+	plinkett:adjustMoney(-1000000)
 	return true,"You tried to go to the trump casino but got lost and ended up at the indian casino.Those lousy indians took all your money.\n",plinkett:adjustBrainValue(-2,rand)
 end
 

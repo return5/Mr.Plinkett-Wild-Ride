@@ -80,7 +80,7 @@ end
 
 local function kidnapDeath(plinkett)
 	plinkett:adjustScore(-100)
-	plinkett.deathMssg("You died while driving to kidnap a woman form the local club.\n")
+	plinkett:deathMssg("You died while driving to kidnap a woman form the local club.\n")
 	return false,"You were driving erratically and thought you saw someone glowing in the dark. You tried to run over them, but turns out it was a street lamp. You crashed your car and died.\n"
 end
 
