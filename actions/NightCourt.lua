@@ -45,7 +45,7 @@ end
 
 local function findDeath(plinkett)
 	plinkett:adjustScore(-100)
-	plinkett.deathMssg = ""
+	plinkett.deathMssg = "You died searching for your Night Court tape.Shame you dided before ever getting ot watch it.\n"
 	return false,"While searching for Night Court your book case fell on top of oyu pinning you down." .. plinkett.mikeJay and "Mike and Jay saw you but couldn't be bothered to help and now you are dead.\n" or
 			(not plinkett.mikeJayDead and "Mike and Jay eventually discovered your body when they came over to fix the VCR, took them three days to notice you were dead.\n" or "Nobody ever discovered you. You died and were left shut in the house forever.\n")
 end

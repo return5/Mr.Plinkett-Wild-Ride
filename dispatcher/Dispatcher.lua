@@ -34,8 +34,8 @@ function Dispatcher.eatPizzaRollsCops(plinkett,rand)
 	return Police.eatPizzaRollsCops(plinkett,rand)
 end
 
-function Dispatcher.nightCourtCops(plinkett,rand)
-	return Police.nightCourtCops(plinkett,rand)
+function Dispatcher.nightCourtCops(plinkett,rand,options)
+	return Police.nightCourtCops(plinkett,rand,options)
 end
 
 function Dispatcher.surrender(plinkett,rand,options)
