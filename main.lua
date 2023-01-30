@@ -26,6 +26,7 @@ local Output <const> = require('io.Output')
 local Input <const> = require('io.Input')
 local ConditionsCheck <const> = require('checks.ConditionsCheck')
 local RandConditions <const> = require('checks.RandConditions')
+local Helpers <const> = require('auxiliary.Helpers')
 
 local function printOptions(options)
 	local keys <const> = {}
@@ -66,10 +67,10 @@ end
 
 local function loopBody(plinkett,rand,options)
 	plinkett:increaseCountsPerTurn()
-	printStats(plinkett)
 	local brainMessage <const> = ConditionsCheck:checkConditions(plinkett,rand,options)
 	Output.write(brainMessage)
 	local message <const> = RandConditions:checkRandConditions(plinkett,rand,options)
+	printStats(plinkett)
 	Output.write(message)
 	local func <const> = takeInput(options)
 	local cont,mssg,brainMessg <const> = func(plinkett,rand,options)
@@ -100,6 +101,7 @@ end
 
 local function main()
 	math.randomseed(os.time())
+	Helpers.optionsTable = OptionsTable
 	local plinkett <const> = Character:new()
 	gameLoop(plinkett)
 	printEndMssg(plinkett)

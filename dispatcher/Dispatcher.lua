@@ -1,4 +1,4 @@
-local MikeJay <const> = require('messages.MikeJay')
+local MikeJay <const> = require('actions.MikeJay')
 local Nadine <const> = require('actions.Nadine')
 local Police <const> = require('actions.Police')
 local Hooker <const> = require('actions.Hooker')

@@ -1,5 +1,3 @@
-
-local OptionsTable <const> = require('options.OptionsTable')
 local Helpers <const> = require('auxiliary.Helpers')
 
 local Nadine <const> = {}
@@ -59,16 +57,6 @@ function Nadine.nightCourtNadine(plinkett,rand,options)
 	plinkett:adjustScore(-100)
 	plinkett.deathMssg = "You died at the hands of a hooker while watching Night Court. All in all not the worse death possible for you.\n"
 	return false,"You sit down to watch night court. Nadine burst in through the door and kills you. Good night sweet prince."
-end
-
-function Nadine.setNadineOptions(options,plinkett)
-	Helpers.resetOptions(options)
-	options.FightNadine = OptionsTable.FightNadine
-	options.surrenderNadine = OptionsTable.SurrenderNadine
-	options.EatPizzaRollsNadine = OptionsTable.EatPizzaRollsNadine
-	if plinkett.vcrFixed and plinkett.hasNightCourt then
-		options.WatchNightCourtNadine = OptionsTable.NightCourtNadine
-	end
 end
 
 return Nadine

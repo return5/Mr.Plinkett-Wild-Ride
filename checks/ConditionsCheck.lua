@@ -143,7 +143,7 @@ end
 local function getBrainMessage(plinkett,rand,brainState)
 	local prevState <const> = plinkett.mentalState
 	local message <const> = plinkett:adjustBrainValue(brainState,rand)
-	if plinkett:cmpBrainState(prevState) then
+	if brainState ~= 0 and plinkett:cmpBrainState(prevState) then
 		return message .. "\n"
 	end
 	return ""

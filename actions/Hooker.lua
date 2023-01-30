@@ -1,4 +1,4 @@
-local Nadine <const> = require('actions.Nadine')
+local Helpers <const> = require('auxiliary.Helpers')
 
 local Hooker <const> = { kill = {}}
 Hooker.__index = Hooker
@@ -21,7 +21,7 @@ local function lucidEscape(plinkett,rand,options)
 	plinkett:adjustScore(-100)
 	plinkett:adjustPoliceChance(0)
 	plinkett.hooker = false
-	Nadine.setNadineOptions(options,plinkett)
+	Helpers.setNadineOptions(options,plinkett)
 	return true,"After promising to watch Revenge Of The Sith with you, she tricks you and runs away.\n",plinkett:adjustBrainValue(-2,rand)
 end
 
@@ -29,7 +29,7 @@ local function crazyEscape(plinkett,rand,options)
 	plinkett:adjustScore(-100)
 	plinkett:adjustPoliceChance(0)
 	plinkett.nadineRevenge = true
-	Nadine.setNadineOptions(options,plinkett)
+	Helpers.setNadineOptions(options,plinkett)
 	return true,"While trying to feed her some delicious pizza rolls she kicks you runs away.\n",plinkett:adjustBrainValue(-2,rand)
 end
 

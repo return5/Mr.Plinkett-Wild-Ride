@@ -1,8 +1,17 @@
-local OptionsTable <const> = require('options.OptionsTable')
 
 local Helpers <const> = {}
 Helpers.__index = Helpers
 
+
+function Helpers.setNadineOptions(options,plinkett)
+	Helpers.resetOptions(options)
+	options.FightNadine = Helpers.optionsTable.FightNadine
+	options.surrenderNadine = Helpers.optionsTable.SurrenderNadine
+	options.EatPizzaRollsNadine = Helpers.optionsTable.EatPizzaRollsNadine
+	if plinkett.vcrFixed and plinkett.hasNightCourt then
+		options.WatchNightCourtNadine = Helpers.optionsTable.NightCourtNadine
+	end
+end
 
 function Helpers.resetOptions(options)
 	for k,_ in pairs(options) do
@@ -10,17 +19,16 @@ function Helpers.resetOptions(options)
 	end
 end
 
-
 function Helpers.setOptions(plinkett,options)
 	if not plinkett.mikeJayDead  then
-		options.CallMikeJay = OptionsTable.CallMikeJay
+		options.CallMikeJay = Helpers.optionsTable.CallMikeJay
 	end
-	options.BrainMedicine = OptionsTable.BrainMedicine
-	options.EatPizzaRoll = OptionsTable.EatPizzaRoll
-	options.NightCourt = OptionsTable.NightCourt
-	options.SocialSecurity = OptionsTable.SocialSecurity
-	options.BuyPizzaRoll = OptionsTable.BuyPizzaRoll
-	options.Quit = OptionsTable.Quit
+	options.BrainMedicine = Helpers.optionsTable.BrainMedicine
+	options.EatPizzaRoll = Helpers.optionsTable.EatPizzaRoll
+	options.NightCourt = Helpers.optionsTable.NightCourt
+	options.SocialSecurity = Helpers.optionsTable.SocialSecurity
+	options.BuyPizzaRoll = Helpers.optionsTable.BuyPizzaRoll
+	options.Quit = Helpers.optionsTable.Quit
 end
 
 function Helpers.remainAboveZero(val,val2)
