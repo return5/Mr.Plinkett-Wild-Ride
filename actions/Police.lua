@@ -1,36 +1,16 @@
-
-local OptionsTable <const> = require('options.OptionsTable')
+local Helpers <const> = require('auxiliary.Helpers')
 
 local Police <const> = {}
 Police.__index = Police
 
 _ENV = Police
 
-
-local function resetOptions(options)
-	for k,_ in pairs(options) do
-		options[k] = nil
-	end
-end
-
-local function setOptions(plinkett,options)
-	if not plinkett.mikeJayDead  then
-		options.CallMikeJay = OptionsTable.CallMikeJay
-	end
-	options.BrainMedicine = OptionsTable.BrainMedicine
-	options.EatPizzaRoll = OptionsTable.EatPizzaRoll
-	options.NightCourt = OptionsTable.NightCourt
-	options.SocialSecurity = OptionsTable.SocialSecurity
-	options.BuyPizzaRoll = OptionsTable.BuyPizzaRoll
-	options.Quit = OptionsTable.Quit
-end
-
 function Police.eatPizzaRollsCops(plinkett,rand,options)
 	if rand(100) > 89 then
 		plinkett:score(250)
 		plinkett:adjustPizzaRolls(-5)
-		resetOptions(options)
-		setOptions(plinkett,options)
+		Helpers.resetOptions(options)
+		Helpers.setOptions(plinkett,options)
 		return true,"You sit down and eat some delicious pizza rolls.When the police come in you offer them some. They accept your offer and you enjoy eating pizza rolls together.After they finish they wish you good night and leave.\n"
 	end
 	plinkett:adjustScore(-100)
@@ -40,8 +20,8 @@ end
 function Police.nightCourtCops(plinkett,rand,options)
 	if rand(100) > 92 then
 		plinkett:score(250)
-		resetOptions(options)
-		setOptions(plinkett,options)
+		Helpers.resetOptions(options)
+		Helpers.setOptions(plinkett,options)
 		return true,"You sit down and watch an episode of Night Court. The cops come in but you barely notice them. The eventually sit down and watch Night Court with you. when the episode is over they wish you a good night and leave.\n",plinkett:adjustBrainValue(1,rand)
 	end
 	plinkett:adjustScore(-100)
@@ -57,8 +37,8 @@ end
 
 local function fightSuccess(plinkett,rand,options)
 	plinkett:adjustScore(200)
-	resetOptions(options)
-	setOptions(plinkett,options)
+	Helpers.resetOptions(options)
+	Helpers.setOptions(plinkett,options)
 	return true,"You popped those cops in mo-town.Luckily for you they didn't report in before entering your house so now nobody will ever know what happened to them.Your life can go back to normal\n",plinkett:adjustBrainValue(-2,rand)
 end
 

@@ -1,16 +1,11 @@
 
 local OptionsTable <const> = require('options.OptionsTable')
+local Helpers <const> = require('auxiliary.Helpers')
 
 local Nadine <const> = {}
 Nadine.__index = Nadine
 
 _ENV = Nadine
-
-local function resetOptions(options)
-	for k,_ in pairs(options) do
-		options[k] = nil
-	end
-end
 
 function Nadine.fightNadine(plinkett,rand,options)
 
@@ -30,7 +25,7 @@ end
 
 
 function Nadine.setNadineOptions(options,plinkett)
-	resetOptions(options)
+	Helpers.resetOptions(options)
 	options.FightNadine = OptionsTable.FightNadine
 	options.surrenderNadine = OptionsTable.SurrenderNadine
 	options.EatPizzaRollsNadine = OptionsTable.EatPizzaRollsNadine

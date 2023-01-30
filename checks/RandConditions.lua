@@ -1,5 +1,6 @@
 --file to contain all functions which can generate random events at the start of each round.
 
+local Helpers <const> = require('auxiliary.Helpers')
 local OptionsTable <const> = require('options.OptionsTable')
 local Output <const> = require('io.Output')
 
@@ -20,12 +21,6 @@ local function printBrainMessage(plinkett,prevState,mssg,mssg2)
 	end
 end
 
-local function resetOptions(options)
-	for k,_ in pairs(options) do
-		options[k] = nil
-	end
-end
-
 local function setOptions(plinkett,options)
 	options.EatPizzaRoll = OptionsTable.EatPizzaRollCops
 	options.NightCourt = OptionsTable.NightCourtCops
@@ -38,7 +33,7 @@ end
 local function checkPolice(plinkett,rand,options)
 	--TODO figure out proper value
 	if plinkett.policeChance > rand(10) then
-		resetOptions(options)
+		Helpers.resetOptions(options)
 		setOptions(plinkett,options)
 		plinkett.police = true
 		return false,getPoliceMessage(plinkett,rand)
