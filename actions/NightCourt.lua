@@ -1,6 +1,7 @@
 
-local NightCourt <const> = {}
+local NightCourt <const> = {find = {}}
 NightCourt.__index = NightCourt
+_ENV = NightCourt
 
 function NightCourt.watchNightCourt(plinkett,rand)
 	if not plinkett.vcrFixed then
@@ -28,5 +29,46 @@ function NightCourt.watchNightCourt(plinkett,rand)
 	end
 	return true,"Your VCR is broken. Perhaps you should call those two guys to get over here to fix your VCR so you can finally watch Night Court.\n"
 end
+
+local function findSuccess(plinkett,rand)
+	plinkett:adjustScore(20)
+	plinkett.hasNightCourt = true
+	plinkett.discoveredMissingNightCourt = false
+	plinkett.nightCourtMssg = ""
+	return true,"You found your precious Night Court tape.You feel like a heavy weight has been taken off your shoulders.\n",plinkett:adjustBrainValue(2,rand)
+end
+
+local function findFailure(plinkett,rand)
+	plinkett:adjustScore(-10)
+	return true,"You failed to find your Night Court tape. You don't know how much longer you can live without Night Court.\n",plinkett:adjustBrainValue(-1,rand)
+end
+
+local function findDeath(plinkett)
+	plinkett:adjustScore(-100)
+	plinkett.deathMssg = ""
+	return false,"While searching for Night Court your book case fell on top of oyu pinning you down." .. plinkett.mikeJay and "Mike and Jay saw you but couldn't be bothered to help and now you are dead.\n" or
+			(not plinkett.mikeJayDead and "Mike and Jay eventually discovered your body when they came over to fix the VCR, took them three days to notice you were dead.\n" or "Nobody ever discovered you. You died and were left shut in the house forever.\n")
+end
+
+local function findExtra(plinkett,rand)
+	plinkett:adjustScore(35)
+	plinkett.hasNightCourt = true
+	plinkett.discoveredMissingNightCourt = false
+	plinkett.nightCourtMssg = ""
+	return true,"You not only found your copy of Night Court but you also found a VHS copy of a Matlock episode.\n",plinkett:adjustBrainValue(4,rand)
+end
+
+local function findFailureCrazy(plinkett,rand)
+	plinkett:adjustScore(-20)
+	return true,"While searching for Night Court in your creepy basement you get distracted talking to the pile of bones in the corner.You never did find the tape.\n",plinkett:adjustBrainValue(-2,rand)
+end
+
+NightCourt.find[true] = {
+	findSuccess,findSuccess,findSuccess,findSuccess,findFailure,findFailure,findFailure,findFailure,findDeath,findExtra,findExtra,
+}
+
+NightCourt.find[false] = {
+	findSuccess,findSuccess,findSuccess,findFailure,findFailure,findFailure,findDeath,findExtra,findExtra,findFailureCrazy,findFailureCrazy
+}
 
 return NightCourt

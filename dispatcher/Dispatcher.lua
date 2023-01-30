@@ -46,8 +46,8 @@ function Dispatcher.fightPolice(plinkett,rand,options)
 	return Police.fightPolice(plinkett,rand,options)
 end
 
-function Dispatcher.findNightCourt(plinkett,rand,options)
-
+function Dispatcher.findNightCourt(plinkett,rand)
+	return NightCourt.find[plinkett.isLucid][rand(#NightCourt.find[plinkett.isLucid])](plinkett,rand)
 end
 
 function Dispatcher.killMikeJay(plinkett,rand)
